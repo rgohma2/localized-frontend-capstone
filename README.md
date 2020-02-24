@@ -1,72 +1,86 @@
 ## Models
 ```
 User
-	-first_name
-	-last_name
-	-email
-	-password
-	-address addr1 add2 city state zip 
+	first_name
+	last_name
+	email
+	password
+	address addr1 add2 city state zip 
 
 
 Business
-	-owner FK: User
-	-category
-	-image
-	-business_name
-	-products *** 
-	-about
-	-address(maybe) -- addr1, addr2, city, state, zip
+	owner FK: User
+	category
+	image
+	business_name
+	products *** 
+	about
+	address(maybe) * addr1, addr2, city, state, zip
 
 
 Post
-	-business FK: Business
-	-image
-	-content
-	-date
+	business FK: Business
+	image
+	content
+	date
 
 
 Subscription
-	-following FK: Business
-	-follower FK: User 
+	following FK: Business
+	follower FK: User 
 
 Comment 
-	-post FK: POST
-	-commenter FK: User
-	-content
-	-date
+	post FK: POST
+	commenter FK: User
+	content
+	date
+
 
 --Stretch Goal--
 
 Message
-	-sender FK: User 
-	-recipient FK: User 
-	-content
-	-date 
+	sender FK: User 
+	recipient FK: User 
+	content
+	date 
 
 
 
 ```
 ## User story
 ```
--user can register for an account and log in
--user can log out
--user can register their business once they have an account
--user with a business can make posts about products or where to find them 
--user with a business can delete their posts
--user with a business can edit their posts
--user can view businesses in their area based on the category they choose 
--user can view a businesses' profile to see a collection of all their posts 
+*user can register for an account and log in
+
+*user can log out
+
+*user can register their business once they have an account
+
+*user with a business can make posts about products or where to find them
+
+*user with a business can delete their posts
+
+*user with a business can edit their posts
+
+*user can view businesses in their area based on the category they choose 
+
+*user can view a businesses' profile to see a collection of all their posts 
 as well as a description of the business
--user can subscribe to businesses to stay updated on their latests posts (newsfeed shows posts of businesses user is subscribed to)
--user with or without a business can comment on a post 
--user can delete their comments 
+
+*user can subscribe to businesses to stay updated on their latests posts 
+(newsfeed shows posts of businesses user is subscribed to)
+
+*user with or without a business can comment on a post
+
+*user can delete their comments 
 
 
 --Stretch Goals--
 
--users can search by keywords for a business  
--users can direct message a business to ask questions 
--delievery/pick up subscription between user and businesses 
+*user can search by keyword for a business  
+
+*user can direct message a business to ask questions 
+
+*delievery/pick up subscription between users and businesses 
 
 ```
 ## Routes
@@ -98,11 +112,11 @@ as well as a description of the business
 ```
 ## Technologies Used
 ```
--React
--Javascript
--Flask
--Python
--Sqlite
--Postgres
+*React
+*Javascript
+*Flask
+*Python
+*Sqlite
+*Postgres
 
 ```
