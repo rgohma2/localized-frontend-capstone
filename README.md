@@ -13,9 +13,9 @@ Business
 	category
 	image
 	business_name
-	products *** 
+	products * * *  
 	about
-	address(maybe) * addr1, addr2, city, state, zip
+	address(maybe) *  addr1, addr2, city, state, zip
 
 
 Post
@@ -48,41 +48,41 @@ Message
 
 ```
 ## User story
-```
-*user can register for an account and log in
 
-*user can log out
+* user can register for an account and log in
 
-*user can register their business once they have an account
+* user can log out
 
-*user with a business can make posts about products or where to find them
+* user can register their business once they have an account
 
-*user with a business can delete their posts
+* user with a business can make posts about products or where to find them
 
-*user with a business can edit their posts
+* user with a business can delete their posts
 
-*user can view businesses in their area based on the category they choose 
+* user with a business can edit their posts
 
-*user can view a businesses' profile to see a collection of all their posts 
+* user can view businesses in their area based on the category they choose 
+
+* user can view a businesses' profile to see a collection of all their posts 
 as well as a description of the business
 
-*user can subscribe to businesses to stay updated on their latests posts 
+* user can subscribe to businesses to stay updated on their latests posts 
 (newsfeed shows posts of businesses user is subscribed to)
 
-*user with or without a business can comment on a post
+* user with or without a business can comment on a post
 
-*user can delete their comments 
+* user can delete their comments 
 
 
 --Stretch Goals--
 
-*user can search by keyword for a business  
+* user can search by keyword for a business  
 
-*user can direct message a business to ask questions 
+* user can direct message a business to ask questions 
 
-*delievery/pick up subscription between users and businesses 
+* delievery/pick up subscription between users and businesses 
 
-```
+
 ## Routes
 ```
 /api/v1/users/register (POST) 
@@ -111,12 +111,12 @@ as well as a description of the business
 
 ```
 ## Technologies Used
-```
-*React
-*Javascript
-*Flask
-*Python
-*Sqlite
-*Postgres
 
-```
+* React
+* Javascript
+* Flask
+* Python
+* Sqlite
+* Postgres
+
+
