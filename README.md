@@ -5,7 +5,12 @@ User
 	last_name
 	email
 	password
-	address addr1 add2 city state zip 
+	address 
+		address 
+		city
+		state
+		zip
+		country 
 
 
 Business
@@ -13,9 +18,13 @@ Business
 	category
 	image
 	business_name
-	products * * *  
 	about
-	address(maybe) *  addr1, addr2, city, state, zip
+	address 
+		address
+		city
+		state
+		zip
+		country
 
 
 Post
@@ -30,7 +39,7 @@ Subscription
 	follower FK: User 
 
 Comment 
-	post FK: POST
+	post FK: Post
 	commenter FK: User
 	content
 	date
