@@ -1,68 +1,108 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Models
+```
+User
+	-first_name
+	-last_name
+	-email
+	-password
+	-address addr1 add2 city state zip 
 
-## Available Scripts
 
-In the project directory, you can run:
+Business
+	-owner FK: User
+	-category
+	-image
+	-business_name
+	-products *** 
+	-about
+	-address(maybe) -- addr1, addr2, city, state, zip
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Post
+	-business FK: Business
+	-image
+	-content
+	-date
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+Subscription
+	-following FK: Business
+	-follower FK: User 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Comment 
+	-post FK: POST
+	-commenter FK: User
+	-content
+	-date
 
-### `npm run build`
+--Stretch Goal--
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Message
+	-sender FK: User 
+	-recipient FK: User 
+	-content
+	-date 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+```
+## User story
+```
+-user can register for an account and log in
+-user can log out
+-user can register their business once they have an account
+-user with a business can make posts about products or where to find them 
+-user with a business can delete their posts
+-user with a business can edit their posts
+-user can view businesses in their area based on the category they choose 
+-user can view a businesses' profile to see a collection of all their posts 
+as well as a description of the business
+-user can subscribe to businesses to stay updated on their latests posts (newsfeed shows posts of businesses user is subscribed to)
+-user with or without a business can comment on a post 
+-user can delete their comments 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+--Stretch Goals--
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-users can search by keywords for a business  
+-users can direct message a business to ask questions 
+-delievery/pick up subscription between user and businesses 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+## Routes
+```
+/api/v1/users/register (POST) 
+/api/v1/users/login (POST)
+/api/v1/users/logout (GET)
+/api/v1/users/<id> (GET)
 
-## Learn More
+/api/v1/posts (GET)
+/api/v1/posts (POST)
+/api/v1/posts/<id> (DELETE)
+/api/v1/posts/<id> (PUT)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+/api/v1/comments/<post_id> (GET)
+/api/v1/comments/<post_id> (POST)
+/api/v1/comments/<post_id> (DELETE)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+/api/v1/businesses (GET)
+/api/v1/businesses/<id> (GET)
+/api/v1/businesses (POST)
+/api/v1/businesses/<id> (DELETE)
+/api/v1/businesses/<id> (PUT)
 
-### Code Splitting
+/api/v1/subscription/<business_id> (GET)
+/api/v1/subscription/<business_id> (POST)
+/api/v1/subscription/<business_id> (DELETE)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+## Technologies Used
+```
+-React
+-Javascript
+-Flask
+-Python
+-Sqlite
+-Postgres
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
