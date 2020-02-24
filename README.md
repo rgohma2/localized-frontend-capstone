@@ -93,7 +93,7 @@ as well as a description of the business
 
 
 ## Routes
-```
+
 | Route | HTTP Method | Description |
 |:------|:------------|------------:|
 |/api/v1/users/register | POST | user register route |
@@ -115,7 +115,7 @@ as well as a description of the business
 |/api/v1/subscription/<business_id> | POST | subscription create route |
 |/api/v1/subscription/<business_id> | DELETE | subscription destroy route |
 
-```
+
 ## Technologies Used
 
 * React
