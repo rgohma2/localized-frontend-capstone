@@ -56,7 +56,7 @@ Message
 
 
 ```
-## User story
+## User Story
 
 * user can register for an account and log in
 
@@ -94,29 +94,26 @@ as well as a description of the business
 
 ## Routes
 ```
-/api/v1/users/register (POST) 
-/api/v1/users/login (POST)
-/api/v1/users/logout (GET)
-/api/v1/users/<id> (GET)
-
-/api/v1/posts (GET)
-/api/v1/posts (POST)
-/api/v1/posts/<id> (DELETE)
-/api/v1/posts/<id> (PUT)
-
-/api/v1/comments/<post_id> (GET)
-/api/v1/comments/<post_id> (POST)
-/api/v1/comments/<post_id> (DELETE)
-
-/api/v1/businesses (GET)
-/api/v1/businesses/<id> (GET)
-/api/v1/businesses (POST)
-/api/v1/businesses/<id> (DELETE)
-/api/v1/businesses/<id> (PUT)
-
-/api/v1/subscription/<business_id> (GET)
-/api/v1/subscription/<business_id> (POST)
-/api/v1/subscription/<business_id> (DELETE)
+| Route | HTTP Method | Description |
+|:------|:------------|------------:|
+|/api/v1/users/register | POST | user register route |
+|/api/v1/users/login | POST | user login route |
+|/api/v1/users/logout | GET | user logout route |
+|/api/v1/posts | GET | post index route |
+|/api/v1/posts | POST | post create route |
+|/api/v1/posts/<id> | DELETE | post destroy route |
+|/api/v1/posts/<id> | PUT | post update route |
+|/api/v1/comments/<post_id> | GET | comment index route |
+|/api/v1/comments/<post_id> | POST | comment create route |
+|/api/v1/comments/<post_id> | DELETE | comment destroy route |
+|/api/v1/businesses | GET | business index route |
+|/api/v1/businesses/<id> | GET | business show route |
+|/api/v1/businesses | POST | business create route |
+|/api/v1/businesses/<id> | DELETE | business destroy route |
+|/api/v1/businesses/<id> | PUT | business update route |
+|/api/v1/subscription/<business_id> | GET | subscription index route |
+|/api/v1/subscription/<business_id> | POST | subscription create route |
+|/api/v1/subscription/<business_id> | DELETE | subscription destroy route |
 
 ```
 ## Technologies Used
