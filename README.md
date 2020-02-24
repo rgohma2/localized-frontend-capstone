@@ -95,7 +95,7 @@ as well as a description of the business
 ## Routes
 
 | Route | HTTP Method | Description |
-|:------|:------------|------------:|
+|:------|:------------:|:------------|
 |/api/v1/users/register | POST | user register route |
 |/api/v1/users/login | POST | user login route |
 |/api/v1/users/logout | GET | user logout route |
