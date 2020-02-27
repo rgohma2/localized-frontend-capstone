@@ -9,19 +9,51 @@ import {
 import LoginRegister from './LoginRegister'
 import './App.css';
 
-function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path='/'>
-          <div>
-            <h1>Localized</h1>
-            <LoginRegister/>
-          </div>
-        </Route>
-      </Switch>
-    </Router>
-  );
+
+class App extends React.Component {
+  constructor(props) {
+
+    super(props)
+
+    this.state = {
+
+    }
+
+  }
+
+  register = async (registerInfo) => {
+    console.log(process.env.REACT_APP_API_URL);
+    const url = process.env.REACT_APP_API_URL + '/api/v1/users/register'
+    const response = await fetch(url, {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(registerInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+
+    const responseJSON = await response.json()
+    console.log(responseJSON)
+
+  }
+
+  render(){
+    return (
+      <Router>
+        <Switch>
+          <Route path='/'>
+            <div>
+              <h1>Localized</h1>
+              <LoginRegister
+              register={this.register}
+              />
+            </div>
+          </Route>
+        </Switch>
+      </Router>
+    )
+  }
 }
 
 

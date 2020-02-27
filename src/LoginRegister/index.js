@@ -35,6 +35,11 @@ class LoginRegister extends React.Component {
 		})
 	}
 
+	handleRegisterSubmit = (event) => {
+		event.preventDefault()
+		this.props.register(this.state)
+	}
+
 	render() {
 		return(
 			<Grid
@@ -62,7 +67,7 @@ class LoginRegister extends React.Component {
 								<h1>Register</h1>
 							</Grid.Row>
 							<Grid.Row>
-								<Form>
+								<Form onSubmit={this.handleRegisterSubmit}>
 								<Form.Field>
 								<div
 								style={{
@@ -204,7 +209,6 @@ class LoginRegister extends React.Component {
 										value={this.state.email}
 										onChange={this.handleChange}
 										/>
-
 										<Form.Input 
 										label="Password"
 										type="password" 
