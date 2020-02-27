@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
   register = async (registerInfo) => {
-    console.log(process.env.REACT_APP_API_URL);
     const url = process.env.REACT_APP_API_URL + '/api/v1/users/register'
     const response = await fetch(url, {
         credentials: 'include',
@@ -37,6 +36,14 @@ class App extends React.Component {
     console.log(responseJSON)
 
   }
+
+  login = async (loginInfo) => {
+
+  }
+
+
+
+
 
   render(){
     return (

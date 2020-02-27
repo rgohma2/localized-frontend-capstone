@@ -39,6 +39,10 @@ class LoginRegister extends React.Component {
 		event.preventDefault()
 		this.props.register(this.state)
 	}
+	handleLoginSubmit = (event) => {
+		event.preventDefault()
+		this.props.login(this.state)
+	}
 
 	render() {
 		return(
@@ -199,7 +203,7 @@ class LoginRegister extends React.Component {
 								<h1>Login</h1>
 							</Grid.Row>
 							<Grid.Row>
-								<Form>
+								<Form onSubmit={this.handleLoginSubmit}>
 								<Segment>
 									<Form.Group>
 										<Form.Input 
