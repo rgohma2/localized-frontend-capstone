@@ -7,6 +7,7 @@ import {
   useParams
 } from 'react-router-dom'
 import LoginRegister from './LoginRegister'
+import { Message, Grid } from 'semantic-ui-react'
 import './App.css';
 
 
@@ -16,7 +17,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-
+      message: '',
+      showMessage: false,
+      loggedIn: false
     }
 
   }
@@ -32,8 +35,13 @@ class App extends React.Component {
         }
     })
 
-    const responseJSON = await response.json()
-    console.log(responseJSON)
+    const registerJSON = await response.json()
+    console.log(registerJSON)
+
+      this.setState({
+        message: registerJSON.message,
+        showMessage: true,
+      })
 
   }
 
@@ -50,6 +58,11 @@ class App extends React.Component {
     const loginJSON = await response.json()
     console.log(loginJSON);
 
+    this.setState({
+        message: loginJSON.message,
+        showMessage: true,
+      })
+
   }
 
 
@@ -58,19 +71,24 @@ class App extends React.Component {
 
   render(){
     return (
-      <Router>
-        <Switch>
-          <Route path='/'>
-            <div>
-              <h1>Localized</h1>
-              <LoginRegister
-              register={this.register}
-              login={this.login}
-              />
-            </div>
-          </Route>
-        </Switch>
-      </Router>
+      <div>
+        <Router>
+          <Switch>
+            <Route path='/'>
+              <div>
+                <h1>Localized</h1>
+                <LoginRegister
+                register={this.register}
+                login={this.login}
+                showMessage={this.state.showMessage}
+                message={this.state.message}
+                loggedIn={this.state.loggedIn}
+                />
+              </div>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     )
   }
 }

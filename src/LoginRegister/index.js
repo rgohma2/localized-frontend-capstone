@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 import './index.css'
-import { Form, Label, Button, Grid, Segment } from 'semantic-ui-react'
+import { Form, Label, Button, Grid, Segment, Message} from 'semantic-ui-react'
 
 class LoginRegister extends React.Component {
 	constructor(props) {
@@ -25,7 +25,7 @@ class LoginRegister extends React.Component {
 			city: '', 
 			state: '', 
 			zip_code: '', 
-			country: '',
+			country: ''
 		}
 	}
 
@@ -38,10 +38,27 @@ class LoginRegister extends React.Component {
 	handleRegisterSubmit = (event) => {
 		event.preventDefault()
 		this.props.register(this.state)
+		this.clearForm()
 	}
 	handleLoginSubmit = (event) => {
 		event.preventDefault()
 		this.props.login(this.state)
+		this.clearForm()
+	}
+
+	clearForm = () => {
+		this.setState({
+			first_name: '',
+			last_name: '',
+			email: '',
+			password: '',
+			address_1: '',
+			address_2: '',
+			city: '', 
+			state: '', 
+			zip_code: '', 
+			country: ''
+		})
 	}
 
 	render() {
@@ -50,16 +67,26 @@ class LoginRegister extends React.Component {
 			className="center aligned"
 			style={{
 				backgroundImage: `url(https://www.reachabovemedia.com/wp-content/uploads/2019/03/optimisation-google-my-business.jpg})`,
-				height: '600px'
+				height: '750px'
 			}}
 			>
 			<Router>
 				<Switch>
 					<Route path='/register'>
-						<div className='form'>
+						<div 
+						style={{
+							marginTop: '50px'
+						}}
+						>
+						{
+							this.props.showMessage === true
+							?
+							<Message header={this.props.message} />
+							:
+							null
+						}
 							<Segment
 							style={{
-								height: '65%',
 								boxShadow: '0px 8px 15px -6px black'
 							}}
 							>
@@ -188,7 +215,18 @@ class LoginRegister extends React.Component {
 						</div>
 					</Route>
 					<Route path='/'>
-						<div className='form'>
+						<div 
+						style={{
+							marginTop: '50px'
+						}}
+						>
+						{
+							this.props.showMessage === true
+							?
+							<Message header={this.props.message} />
+							:
+							null
+						}
 							<Segment
 							style={{
 								height: '250px',
