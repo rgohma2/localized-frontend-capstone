@@ -38,6 +38,17 @@ class App extends React.Component {
   }
 
   login = async (loginInfo) => {
+    const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
+    const response = await fetch(url, {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(loginInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    const loginJSON = await response.json()
+    console.log(loginJSON);
 
   }
 
@@ -54,6 +65,7 @@ class App extends React.Component {
               <h1>Localized</h1>
               <LoginRegister
               register={this.register}
+              login={this.login}
               />
             </div>
           </Route>
