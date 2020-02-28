@@ -1,11 +1,4 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from 'react-router-dom'
 import LoginRegister from './LoginRegister'
 import LocalizedContainer from './LocalizedContainer'
 // import { Grid } from 'semantic-ui-react'
@@ -68,10 +61,14 @@ class App extends React.Component {
 
   hideMessage = (bool) => {
     if (bool === true) {
-      console.log('hello');
-      this.setState({
-        showMessage: false
-      })
+      this.setState({showMessage: false})
+    }
+  }
+
+  logout = (bool) => {
+    console.log('logout');
+    if (bool === true){
+      this.setState({loggedIn: false})
     }
   }
 
@@ -97,7 +94,9 @@ class App extends React.Component {
             />
           </div>
           :
-          <LocalizedContainer />
+          <LocalizedContainer 
+          logout={this.logout}
+          />
         }
       </div>
     )

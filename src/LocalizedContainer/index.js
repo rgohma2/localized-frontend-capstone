@@ -1,5 +1,6 @@
 import React from 'react'
 import NewsfeedList from './NewsfeedList'
+import NewBusinessForm from './NewBusinessForm'
 
 import { Segment } from 'semantic-ui-react'
 
@@ -7,8 +8,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom'
 
 class LocalizedContainer extends React.Component {
@@ -26,7 +26,7 @@ class LocalizedContainer extends React.Component {
 			<div>
 				<Router>
 					<nav>
-						<Link to='/'><h1>Localized</h1></Link>
+						<Link to='/'><h1 style={{color:'black'}}>Localized</h1></Link>
 						<div
 						style={{
 							alignSelf: 'center',
@@ -37,7 +37,7 @@ class LocalizedContainer extends React.Component {
 							<Link to='/newsfeed'>Newsfeed</Link>
 							<Link to='/local'>Local Businesses</Link> 
 							<Link to='/new'>Add Your Business</Link>
-							<Link to='/'>Logout</Link>
+							<Link to='/' onClick={() => this.props.logout(true)}>Logout</Link>
 						</div>
 					</nav>
 					<Segment>
@@ -49,6 +49,7 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/new'>
 								<h1>Add Your Business</h1>
+								<NewBusinessForm/>
 							</Route>
 						</Switch>
 						<Switch>

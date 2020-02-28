@@ -3,12 +3,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom'
 
 import './index.css'
-import { Form, Label, Button, Grid, Segment, Message} from 'semantic-ui-react'
+import { Form, Button, Grid, Segment, Message} from 'semantic-ui-react'
 
 class LoginRegister extends React.Component {
 	constructor(props) {
@@ -202,6 +201,7 @@ class LoginRegister extends React.Component {
 								</Grid.Column>
 								</div>
 								<Button
+								color='blue'
 								style={{
 									width:'100%',
 									marginTop: '10px'
@@ -260,6 +260,7 @@ class LoginRegister extends React.Component {
 										/>
 									</Form.Group>
 									<Button
+									color='blue'
 									style={{
 										width:'100%'
 									}}
