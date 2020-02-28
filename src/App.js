@@ -51,9 +51,9 @@ class App extends React.Component {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(loginInfo),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        // headers: {
+        //   'Content-Type': 'application/json'
+        // }
     })
     const loginJSON = await response.json()
     console.log(loginJSON);
@@ -63,6 +63,15 @@ class App extends React.Component {
         showMessage: true,
       })
 
+  }
+
+  hideMessage = (bool) => {
+    if (bool === true) {
+      console.log('hello');
+      this.setState({
+        showMessage: false
+      })
+    }
   }
 
 
@@ -83,6 +92,7 @@ class App extends React.Component {
                 showMessage={this.state.showMessage}
                 message={this.state.message}
                 loggedIn={this.state.loggedIn}
+                hideMessage={this.hideMessage}
                 />
               </div>
             </Route>

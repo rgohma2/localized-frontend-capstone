@@ -210,7 +210,7 @@ class LoginRegister extends React.Component {
 								</Form.Field>
 								</Form>
 							</Grid.Row>
-								<small> Already have an account? Login <Link to='/'>here</Link>!</small>
+								<small> Already have an account? Login <Link to='/' onClick={() => this.props.hideMessage(true)}>here</Link>!</small>
 							</Segment>
 						</div>
 					</Route>
@@ -267,7 +267,7 @@ class LoginRegister extends React.Component {
 								</Segment>
 								</Form>
 							</Grid.Row>
-								<small> Don't have an account yet? Register <Link to='/register'>here</Link></small>
+								<small> Don't have an account yet? Register <Link to='/register' onClick={() => this.props.hideMessage(true)}>here</Link></small>
 							</Segment>
 						</div>
 					</Route>
