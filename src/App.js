@@ -7,7 +7,8 @@ import {
   useParams
 } from 'react-router-dom'
 import LoginRegister from './LoginRegister'
-import { Message, Grid } from 'semantic-ui-react'
+import LocalizedContainer from './LocalizedContainer'
+// import { Grid } from 'semantic-ui-react'
 import './App.css';
 
 
@@ -19,7 +20,7 @@ class App extends React.Component {
     this.state = {
       message: '',
       showMessage: false,
-      loggedIn: false
+      loggedIn: true
     }
 
   }
@@ -40,9 +41,8 @@ class App extends React.Component {
 
       this.setState({
         message: registerJSON.message,
-        showMessage: true,
+        showMessage: true
       })
-
   }
 
   login = async (loginInfo) => {
@@ -51,9 +51,9 @@ class App extends React.Component {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(loginInfo),
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // }
+        headers: {
+          'Content-Type': 'application/json'
+        }
     })
     const loginJSON = await response.json()
     console.log(loginJSON);
@@ -61,6 +61,7 @@ class App extends React.Component {
     this.setState({
         message: loginJSON.message,
         showMessage: true,
+        loggedIn: true
       })
 
   }
@@ -81,23 +82,23 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Router>
-          <Switch>
-            <Route path='/'>
-              <div>
-                <h1>Localized</h1>
-                <LoginRegister
-                register={this.register}
-                login={this.login}
-                showMessage={this.state.showMessage}
-                message={this.state.message}
-                loggedIn={this.state.loggedIn}
-                hideMessage={this.hideMessage}
-                />
-              </div>
-            </Route>
-          </Switch>
-        </Router>
+        {
+          this.state.loggedIn === false
+          ?
+          <div>
+            <h1>Localized</h1>
+            <LoginRegister
+            register={this.register}
+            login={this.login}
+            showMessage={this.state.showMessage}
+            message={this.state.message}
+            loggedIn={this.state.loggedIn}
+            hideMessage={this.hideMessage}
+            />
+          </div>
+          :
+          <LocalizedContainer />
+        }
       </div>
     )
   }
