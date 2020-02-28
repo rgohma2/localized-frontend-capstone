@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Card, Segment } from 'semantic-ui-react'
+
 
 
 class NewsfeedList extends React.Component {
@@ -8,7 +10,7 @@ class NewsfeedList extends React.Component {
 		super(props)
 
 		this.state = {
-			posts: ''
+			posts: []
 		}
 	}
 
@@ -32,10 +34,21 @@ class NewsfeedList extends React.Component {
 	}
 
 	render() {
-		// console.log(this.props.category);
+		let posts = this.state.posts
+		if (this.props.category !== 'all') {
+			posts = posts.filter(post => post.business.category === this.props.category)
+		} 
+		console.log(posts);
 		return(
 			<div>
-				
+				<ul>
+					{posts.map((post) => {
+						return(
+							<li key={post.id}>
+								{post.content}
+							</li>
+					)})}
+				</ul>
 			</div>
 		)
 	}
