@@ -8,7 +8,7 @@ class NewBusinessForm extends React.Component {
 		super(props)
 
 		this.state = {
-			business_name: '',
+			name: '',
 			category: '',
 			image: '',
 			about: '',
@@ -17,9 +17,32 @@ class NewBusinessForm extends React.Component {
 			city: '', 
 			state: '', 
 			zip_code: '', 
-			country: ''
+			country: '',
+			options: this.getOptions()
 		}
 	}
+
+	handleChange = (event) => {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.props.addBusiness(this.state)
+	}
+
+	getOptions = () => {
+		return (
+		[
+			{key: 4, text: 'Agriculture', value: 'agriculture'},
+			{key: 3, text: 'Clothing', value: 'clothing'},
+			{key: 4, text: 'Drink', value: 'drink'},
+			{key: 1, text: 'Food', value: 'food'},
+			{key: 2, text: 'Technology', value: 'technology'},
+		]
+	)}
 
 	render() {
 		return(
@@ -49,7 +72,7 @@ class NewBusinessForm extends React.Component {
 						<h1>New Business</h1>
 					</Grid.Row>
 					<Grid.Row>
-						<Form onSubmit={this.handleRegisterSubmit}>
+						<Form onSubmit={this.handleSubmit}>
 						<Form.Field>
 						<div
 						style={{
@@ -61,15 +84,18 @@ class NewBusinessForm extends React.Component {
 								<Form.Input 
 								label="Business Name" 
 								type="text" 
-								name="business_name"
+								name="name"
 								value={this.state.business_name}
 								onChange={this.handleChange}
 								/>
-								<Form.Select 
+								<Form.Select
+								fluid
 								label="Category"
-								type="text" 
-								value={this.state.category}
-								onChange={this.handleChange}
+								name='category'
+								options={this.state.options}
+								onChange={(e, { value }) => this.setState({
+									category: value
+								})}	 
 								/>
 								<Form.Input 
 								label="About" 
@@ -94,7 +120,6 @@ class NewBusinessForm extends React.Component {
 								value={this.state.address_1}
 								onChange={this.handleChange}
 								/>
-
 								<Form.Input 
 								label="Address 2"
 								type="text" 
@@ -146,7 +171,7 @@ class NewBusinessForm extends React.Component {
 							width:'100%',
 							marginTop: '10px'
 						}}
-						>Register</Button>
+						>Create Business</Button>
 						</Form.Field>
 						</Form>
 					</Grid.Row>

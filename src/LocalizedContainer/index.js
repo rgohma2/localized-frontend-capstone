@@ -21,6 +21,22 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	addBusiness = async (businessInfo) => {
+		console.log('hi');
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'POST',
+	        body: JSON.stringify(businessInfo),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
+		})
+		const newBusJSON = await response.json()
+		console.log(newBusJSON);
+	}
+
+
 	render() {
 		return(
 			<div>
@@ -49,7 +65,9 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/new'>
 								<h1>Add Your Business</h1>
-								<NewBusinessForm/>
+								<NewBusinessForm
+								addBusiness={this.addBusiness}
+								/>
 							</Route>
 						</Switch>
 						<Switch>

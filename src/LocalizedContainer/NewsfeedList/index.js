@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Form, Button, Grid, Segment, Message} from 'semantic-ui-react'
+
 
 class NewsfeedList extends React.Component {
-	constructor() {
+	constructor(props) {
 
-		super()
+		super(props)
 
 		this.state = {
 
