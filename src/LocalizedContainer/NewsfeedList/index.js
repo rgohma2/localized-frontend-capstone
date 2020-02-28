@@ -8,7 +8,7 @@ class NewsfeedList extends React.Component {
 		super(props)
 
 		this.state = {
-
+			posts: ''
 		}
 	}
 
@@ -23,10 +23,16 @@ class NewsfeedList extends React.Component {
 		})
 		const postsJSON = await response.json()
 		console.log(postsJSON);
+
+		if (postsJSON.status === 201) {
+			this.setState({
+				posts: postsJSON.data
+			})
+		}
 	}
 
 	render() {
-		console.log(this.props.category);
+		// console.log(this.props.category);
 		return(
 			<div>
 				
