@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Segment, Menu } from 'semantic-ui-react'
+import { Menu, Grid } from 'semantic-ui-react'
+import NewsfeedList from '../NewsfeedList'
 
 class CategoryList extends React.Component {
 
@@ -8,43 +9,60 @@ class CategoryList extends React.Component {
 		super(props)
 
 		this.state = {
-			activeItem: 'All'
+			activeItem: 'all'
 		}
 	}
 
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+	handleItemClick = (e, { name }) => {
+		this.setState({ activeItem: name })
+	}
 
 	render(){
 		const { activeItem } = this.state
 		return(
-			<Menu vertical fluid>
+			<Grid centered columns={2} divided>
+				<Grid.Column>
+					<Menu vertical fluid>
 
-				<Menu.Item 
-				name='agriculture'
-				active={activeItem === 'agriculture'}
-              	onClick={this.handleItemClick}
-				/>
-				<Menu.Item 
-				name='clothing'
-				active={activeItem === 'clothing'}
-              	onClick={this.handleItemClick}
-				/>
-				<Menu.Item 
-				name='drink'
-				active={activeItem === 'drink'}
-              	onClick={this.handleItemClick}
-				/>
-				<Menu.Item 
-				name='food'
-				active={activeItem === 'food'}
-              	onClick={this.handleItemClick}
-				/>
-				<Menu.Item 
-				name='technology'
-				active={activeItem === 'technology'}
-              	onClick={this.handleItemClick}
-				/>
-			</Menu>
+						<Menu.Item 
+						name='all'
+						active={activeItem === 'all'}
+		              	onClick={this.handleItemClick}
+						/>
+						<Menu.Item 
+						name='agriculture'
+						active={activeItem === 'agriculture'}
+		              	onClick={this.handleItemClick}
+						/>
+						<Menu.Item 
+						name='clothing'
+						active={activeItem === 'clothing'}
+		              	onClick={this.handleItemClick}
+						/>
+						<Menu.Item 
+						name='drink'
+						active={activeItem === 'drink'}
+		              	onClick={this.handleItemClick}
+						/>
+						<Menu.Item 
+						name='food'
+						active={activeItem === 'food'}
+		              	onClick={this.handleItemClick}
+						/>
+						<Menu.Item 
+						name='technology'
+						active={activeItem === 'technology'}
+		              	onClick={this.handleItemClick}
+						/>
+					</Menu>
+				</Grid.Column>
+				<Grid.Column>
+					<NewsfeedList
+					category={this.state.activeItem}
+					/>
+				</Grid.Column>
+			</Grid>
 		)	
 	}
 }

@@ -1,9 +1,8 @@
 import React from 'react'
-import NewsfeedList from './NewsfeedList'
 import NewBusinessForm from './NewBusinessForm'
 import CategoryList from './CategoryList'
 
-import { Segment, Grid } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 
 import {
   BrowserRouter as Router,
@@ -74,17 +73,7 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/newsfeed'>
 								<h1>Newsfeed</h1>
-								<Grid centered columns={3} divided>
-									<Grid.Column>
-										<CategoryList/>
-									</Grid.Column>
-									<Grid.Column>
-										<NewsfeedList/>
-									</Grid.Column>
-									<Grid.Column>
-										<NewsfeedList/>
-									</Grid.Column>
-								</Grid>
+								<CategoryList/>	
 							</Route>
 						</Switch>
 					</Segment>
