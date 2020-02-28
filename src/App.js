@@ -15,7 +15,6 @@ class App extends React.Component {
       showMessage: false,
       loggedIn: true
     }
-
   }
 
   register = async (registerInfo) => {
