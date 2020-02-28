@@ -62,6 +62,8 @@ class CategoryList extends React.Component {
 					category={this.state.activeItem}
 					/>
 				</Grid.Column>
+				<Grid.Column>
+				</Grid.Column>
 			</Grid>
 		)	
 	}

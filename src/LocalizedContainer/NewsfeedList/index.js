@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Segment } from 'semantic-ui-react'
+import { Card, Segment, Image } from 'semantic-ui-react'
 
 
 
@@ -41,14 +41,16 @@ class NewsfeedList extends React.Component {
 		console.log(posts);
 		return(
 			<div>
-				<ul>
-					{posts.map((post) => {
-						return(
-							<li key={post.id}>
-								{post.content}
-							</li>
-					)})}
-				</ul>
+				{posts.map((post) => {
+					return(
+						<Segment key={post.id}>
+							<Image width={5} 
+							src='https://cdn.sallysbakingaddiction.com/wp-content/uploads/2016/04/how-to-make-homemade-glazed-doughnuts-2.jpg'
+							size='medium'
+							/>
+							{post.content}
+						</Segment>
+				)})}
 			</div>
 		)
 	}

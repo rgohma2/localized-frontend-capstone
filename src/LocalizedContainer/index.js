@@ -12,9 +12,9 @@ import {
 } from 'react-router-dom'
 
 class LocalizedContainer extends React.Component {
-	constructor() {
+	constructor(props) {
 
-		super()
+		super(props)
 
 		this.state = {
 
@@ -51,8 +51,14 @@ class LocalizedContainer extends React.Component {
 						}}
 						>
 							<Link to='/newsfeed'>Newsfeed</Link>
-							<Link to='/local'>Local Businesses</Link> 
-							<Link to='/new'>Add Your Business</Link>
+							<Link to='/local'>Local Businesses</Link>
+							{	
+								this.props.businessOwner === false
+								?
+								<Link to='/new'>Add Your Business</Link>
+								:
+								<Link to='/profile'>Your Business Profile</Link>
+							}
 							<Link to='/' onClick={() => this.props.logout(true)}>Logout</Link>
 						</div>
 					</nav>

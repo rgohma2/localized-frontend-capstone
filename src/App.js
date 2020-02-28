@@ -13,7 +13,8 @@ class App extends React.Component {
     this.state = {
       message: '',
       showMessage: false,
-      loggedIn: true
+      loggedIn: true,
+      businessOwner: false
     }
   }
 
@@ -50,6 +51,12 @@ class App extends React.Component {
     const loginJSON = await response.json()
     console.log(loginJSON);
 
+    if (loginJSON.business !== '') {
+      this.setState({
+        businessOwner: true
+      })
+    }
+
     this.setState({
         message: loginJSON.message,
         showMessage: true,
@@ -67,9 +74,15 @@ class App extends React.Component {
   logout = (bool) => {
     console.log('logout');
     if (bool === true){
-      this.setState({loggedIn: false})
+      this.setState({
+        loggedIn: false,
+        businessOwner:false
+      })
     }
   }
+
+
+
 
 
 
@@ -95,6 +108,7 @@ class App extends React.Component {
           :
           <LocalizedContainer 
           logout={this.logout}
+          businessOwner={this.state.businessOwner}
           />
         }
       </div>
