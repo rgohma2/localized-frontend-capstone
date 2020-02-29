@@ -2,6 +2,7 @@ import React from 'react'
 import NewBusinessForm from './NewBusinessForm'
 import CategoryList from './CategoryList'
 import BusinessProfile from './BusinessProfile'
+import NewPostModal from './NewPostModal'
 
 import { Segment } from 'semantic-ui-react'
 
@@ -18,7 +19,7 @@ class LocalizedContainer extends React.Component {
 		super(props)
 
 		this.state = {
-
+			newModalOpen: false
 		}
 	}
 
@@ -35,6 +36,12 @@ class LocalizedContainer extends React.Component {
 		})
 		const newBusJSON = await response.json()
 		console.log(newBusJSON);
+	}
+
+	toggleNewModal = () => {
+		this.setState({
+			newModalOpen: this.state.newModalOpen === false ? true : false
+		})
 	}
 
 
@@ -74,6 +81,7 @@ class LocalizedContainer extends React.Component {
 								<h1>Add Your Business</h1>
 								<NewBusinessForm
 								addBusiness={this.addBusiness}
+								toggleNewModal={this.toggleNewModal}
 								/>
 							</Route>
 						</Switch>
@@ -87,7 +95,8 @@ class LocalizedContainer extends React.Component {
 								<h1>Business Profile</h1>
 								<BusinessProfile
 								business={this.props.business}
-								/>	
+								/>
+								<NewPostModal/>	
 							</Route>
 						</Switch>
 						</Switch>
