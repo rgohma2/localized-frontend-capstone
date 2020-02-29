@@ -44,6 +44,20 @@ class LocalizedContainer extends React.Component {
 		})
 	}
 
+	addPost = async (postInfo) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.props.business.id
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'POST',
+	        body: JSON.stringify(postInfo),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
+		})
+		const postJSON = await response.json()
+		console.log(postJSON);
+	}
+
 
 	render() {
 		return(
@@ -101,6 +115,7 @@ class LocalizedContainer extends React.Component {
 									?
 									<NewPostModal
 									toggleNewModal={this.toggleNewModal}
+									addPost={this.addPost}
 									/>	
 									:
 									null
