@@ -14,7 +14,8 @@ class App extends React.Component {
       message: '',
       showMessage: false,
       loggedIn: true,
-      businessOwner: false
+      businessOwner: false,
+      business: ''
     }
   }
 
@@ -53,7 +54,8 @@ class App extends React.Component {
 
     if (loginJSON.business !== '') {
       this.setState({
-        businessOwner: true
+        businessOwner: true,
+        business: loginJSON.business
       })
     }
 
@@ -109,6 +111,7 @@ class App extends React.Component {
           <LocalizedContainer 
           logout={this.logout}
           businessOwner={this.state.businessOwner}
+          business={this.state.business}
           />
         }
       </div>

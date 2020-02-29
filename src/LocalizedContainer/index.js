@@ -1,6 +1,7 @@
 import React from 'react'
 import NewBusinessForm from './NewBusinessForm'
 import CategoryList from './CategoryList'
+import BusinessProfile from './BusinessProfile'
 
 import { Segment } from 'semantic-ui-react'
 
@@ -81,6 +82,14 @@ class LocalizedContainer extends React.Component {
 								<h1>Newsfeed</h1>
 								<CategoryList/>	
 							</Route>
+							<Switch>
+							<Route path='/profile'>
+								<h1>Business Profile</h1>
+								<BusinessProfile
+								business={this.props.business}
+								/>	
+							</Route>
+						</Switch>
 						</Switch>
 					</Segment>
 				</Router>
