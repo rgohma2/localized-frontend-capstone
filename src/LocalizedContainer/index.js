@@ -81,7 +81,6 @@ class LocalizedContainer extends React.Component {
 								<h1>Add Your Business</h1>
 								<NewBusinessForm
 								addBusiness={this.addBusiness}
-								toggleNewModal={this.toggleNewModal}
 								/>
 							</Route>
 						</Switch>
@@ -94,9 +93,18 @@ class LocalizedContainer extends React.Component {
 							<Route path='/profile'>
 								<h1>Business Profile</h1>
 								<BusinessProfile
+								toggleNewModal={this.toggleNewModal}
 								business={this.props.business}
 								/>
-								<NewPostModal/>	
+								{
+									this.state.newModalOpen === true
+									?
+									<NewPostModal
+									toggleNewModal={this.toggleNewModal}
+									/>	
+									:
+									null
+								}
 							</Route>
 						</Switch>
 						</Switch>

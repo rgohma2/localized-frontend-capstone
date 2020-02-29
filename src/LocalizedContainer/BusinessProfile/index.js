@@ -42,7 +42,7 @@ class BusinessProfile extends React.Component {
 						}}
 						>{this.props.business.name}</h1>
 					</Card>
-					<Button style={{marginBottom:'45px'}} size='large'>Make New Post</Button>
+					<Button onClick={this.props.toggleNewModal} style={{marginBottom:'45px'}} size='large'>Make New Post</Button>
 				</Segment>
 			</div>
 		)

@@ -19,12 +19,17 @@ class NewPostModal extends React.Component {
 		})
 	}
 
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.prop.addPost(this.state)
+	}
+
 	render() {
 		return(
 			<Modal open={true} closeIcon={true} onClose={this.props.toggleNewModal}>
 			<Modal.Header>Make New Post</Modal.Header>
 			<Modal.Content>
-				<Form>
+				<Form onSubmit>
 					<Form.Input
 					type='text'
 					label='Post Image'
