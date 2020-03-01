@@ -137,7 +137,7 @@ class LocalizedContainer extends React.Component {
 		const subJSON = await response.json()
 		console.log(subJSON)
 		if (subJSON.status === 200) {
-
+			this.getSubscriptions()
 		}
 	}
 

@@ -41,7 +41,6 @@ class NewsfeedList extends React.Component {
 		if (this.props.category !== 'all') {
 			posts = posts.filter(post => post.business.category === this.props.category)
 		} 
-		console.log(posts);
 		return(
 			<Segment>
 				{posts.map((post) => {
