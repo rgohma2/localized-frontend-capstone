@@ -64,7 +64,6 @@ class App extends React.Component {
         showMessage: true,
         loggedIn: true
       })
-
   }
 
   hideMessage = (bool) => {
@@ -81,6 +80,16 @@ class App extends React.Component {
         businessOwner:false
       })
     }
+  }
+
+  // when a business is created by a user their new business is
+  // stored in state to create their profile and they become a business
+  // owner which gives them the optionto view their profile in nav bar
+  renderNewBusiness = (newBusiness) => {
+    this.setState({
+      business: newBusiness,
+      businessOwner: true
+    })
   }
 
 
@@ -112,6 +121,7 @@ class App extends React.Component {
           logout={this.logout}
           businessOwner={this.state.businessOwner}
           business={this.state.business}
+          renderNewBusiness={this.renderNewBusiness}
           />
         }
       </div>

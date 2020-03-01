@@ -10,7 +10,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom'
 
 class LocalizedContainer extends React.Component {
@@ -19,7 +20,8 @@ class LocalizedContainer extends React.Component {
 		super(props)
 
 		this.state = {
-			newModalOpen: false
+			newModalOpen: false,
+			addedBusiness: false
 		}
 	}
 
@@ -36,6 +38,13 @@ class LocalizedContainer extends React.Component {
 		})
 		const newBusJSON = await response.json()
 		console.log(newBusJSON);
+
+		if (newBusJSON.status == 200) {
+			this.props.renderNewBusiness(newBusJSON.data)
+			this.setState({
+				addedBusiness: true
+			})
+		}
 	}
 
 	toggleNewModal = () => {
@@ -123,6 +132,13 @@ class LocalizedContainer extends React.Component {
 							</Route>
 						</Switch>
 						</Switch>
+					{
+						this.state.addedBusiness === true
+						?
+						<Redirect to='/profile'/>
+						:
+						null
+					}
 					</Segment>
 				</Router>
 			</div>
