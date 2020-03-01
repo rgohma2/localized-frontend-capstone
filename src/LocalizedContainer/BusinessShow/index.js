@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Segment, Card, Button } from 'semantic-ui-react'
+import { Grid, Segment, Card, Button, Image } from 'semantic-ui-react'
 
 class BusinessShow extends React.Component {
 	constructor(props) {
@@ -55,7 +55,9 @@ class BusinessShow extends React.Component {
 						return(
 							<Card key={post.id}>
 								{post.business.name}
+								<Image src={post.image}/>
 								{post.content}
+								<br />
 								{post.date}
 							</Card>
 					)})}

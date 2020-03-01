@@ -40,18 +40,18 @@ class NewsfeedList extends React.Component {
 		} 
 		console.log(posts);
 		return(
-			<div>
+			<Segment>
 				{posts.map((post) => {
 					return(
-						<Segment key={post.id}>
-							<Image width={5} 
-							src='https://cdn.sallysbakingaddiction.com/wp-content/uploads/2016/04/how-to-make-homemade-glazed-doughnuts-2.jpg'
-							size='medium'
-							/>
+						<Card key={post.id}>
+							{post.business.name}
+							<Image src={post.image}/>
 							{post.content}
-						</Segment>
+							<br />
+							{post.date}
+						</Card>
 				)})}
-			</div>
+			</Segment>
 		)
 	}
 }
