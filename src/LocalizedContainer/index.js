@@ -4,6 +4,7 @@ import CategoryList from './CategoryList'
 import BusinessProfile from './BusinessProfile'
 import NewPostModal from './NewPostModal'
 import LocalBusinessesList from './LocalBusinessesList'
+import BusinessShow from './BusinessShow'
 
 import { Segment } from 'semantic-ui-react'
 
@@ -23,7 +24,9 @@ class LocalizedContainer extends React.Component {
 		this.state = {
 			businesses: [],
 			newModalOpen: false,
-			addedBusiness: false
+			addedBusiness: false,
+			busIdToShow: -1,
+			businessToShow: ''
 		}
 	}
 
@@ -53,7 +56,7 @@ class LocalizedContainer extends React.Component {
 		const newBusJSON = await response.json()
 		console.log(newBusJSON);
 
-		if (newBusJSON.status == 200) {
+		if (newBusJSON.status === 200) {
 			this.props.renderNewBusiness(newBusJSON.data)
 			this.setState({
 				addedBusiness: true
@@ -79,6 +82,24 @@ class LocalizedContainer extends React.Component {
 		})
 		const postJSON = await response.json()
 		console.log(postJSON);
+	}
+
+	getBusinessId = (id) => {
+		this.setState({
+			busIdToShow: id
+		})
+	}
+
+	getBusiness = async () => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/' + this.state.busIdToShow
+		const response = await fetch(url)
+		const busJSON = await response.json()
+		console.log(busJSON);
+		if (busJSON.status === 200 && this.state.busIdToShow !== -1){
+			this.setState({
+				businessToShow: busJSON.data
+			})
+		}
 	}
 
 
@@ -113,6 +134,7 @@ class LocalizedContainer extends React.Component {
 								<h1>Local Businesses</h1>
 								<LocalBusinessesList
 								businesses={this.state.businesses}
+								getBusinessId={this.getBusinessId}
 								/>
 							</Route>
 						</Switch>
@@ -130,24 +152,32 @@ class LocalizedContainer extends React.Component {
 								<CategoryList/>	
 							</Route>
 							<Switch>
-							<Route path='/profile'>
-								<h1>Business Profile</h1>
-								<BusinessProfile
-								toggleNewModal={this.toggleNewModal}
-								business={this.props.business}
-								/>
-								{
-									this.state.newModalOpen === true
-									?
-									<NewPostModal
+								<Route path='/profile'>
+									<h1>Business Profile</h1>
+									<BusinessProfile
 									toggleNewModal={this.toggleNewModal}
-									addPost={this.addPost}
-									/>	
-									:
-									null
-								}
-							</Route>
+									business={this.props.business}
+									/>
+									{
+										this.state.newModalOpen === true
+										?
+										<NewPostModal
+										toggleNewModal={this.toggleNewModal}
+										addPost={this.addPost}
+										/>	
+										:
+										null
+									}
+								</Route>
+							</Switch>
 						</Switch>
+						<Switch>
+								<Route path='/show/:id'>
+									<BusinessShow 
+									getBusiness={this.getBusiness}
+									businessToShow={this.state.businessToShow}
+									/>
+								</Route>
 						</Switch>
 					{
 						this.state.addedBusiness === true

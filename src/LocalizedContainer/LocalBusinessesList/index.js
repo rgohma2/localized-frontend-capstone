@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Segment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class LocalBusinessesList extends React.Component {
 	constructor(props) {
@@ -18,7 +19,7 @@ class LocalBusinessesList extends React.Component {
 			{this.props.businesses.map(b => {
 				return(
 					<Segment key={b.id}>
-						{b.name}
+						<Link onClick={() => this.props.getBusinessId(b.id)} to={'/show/' + b.id}>{b.name}</Link>
 					</Segment>
 				)})}
 			</div>
