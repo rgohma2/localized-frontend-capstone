@@ -3,6 +3,7 @@ import NewBusinessForm from './NewBusinessForm'
 import CategoryList from './CategoryList'
 import BusinessProfile from './BusinessProfile'
 import NewPostModal from './NewPostModal'
+import LocalBusinessesList from './LocalBusinessesList'
 
 import { Segment } from 'semantic-ui-react'
 
@@ -20,9 +21,22 @@ class LocalizedContainer extends React.Component {
 		super(props)
 
 		this.state = {
+			businesses: [],
 			newModalOpen: false,
 			addedBusiness: false
 		}
+	}
+
+	componentDidMount() {
+		this.getBusinesses()
+	}
+
+	getBusinesses = async () => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
+		const response = await fetch(url)
+		const businessesJson = await response.json()
+		console.log(businessesJson);
+		this.setState({businesses: businessesJson.data})
 	}
 
 	addBusiness = async (businessInfo) => {
@@ -97,6 +111,9 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/local'>
 								<h1>Local Businesses</h1>
+								<LocalBusinessesList
+								businesses={this.state.businesses}
+								/>
 							</Route>
 						</Switch>
 						<Switch>
