@@ -18,6 +18,9 @@ class NewsfeedList extends React.Component {
 		this.getPosts()
 	}
 
+
+	// temporary place to view all posts
+	// will be replaced with only posts from businesses user is subscribed to
 	getPosts = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/'
 		const response = await fetch(url, {

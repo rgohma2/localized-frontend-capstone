@@ -125,8 +125,14 @@ class LocalizedContainer extends React.Component {
 	}
 
 	// subscribes the current logged in user to the business they choose 
-	createSubscription = async (id) => {
+	addSubscription = async (id) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/' + id
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'POST'
+		})
+		const subJSON = await response.json()
+		console.log(subJSON)
 	}
 
 
@@ -204,6 +210,7 @@ class LocalizedContainer extends React.Component {
 									getBusiness={this.getBusiness}
 									businessToShow={this.state.businessToShow}
 									posts={this.state.businessToShowPosts}
+									addSubscription={this.addSubscription}
 									/>
 								</Route>
 						</Switch>
