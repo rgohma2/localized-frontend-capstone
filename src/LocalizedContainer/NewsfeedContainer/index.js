@@ -70,6 +70,7 @@ class NewsfeedContainer extends React.Component {
 				<Grid.Column>
 					<NewsfeedList
 					category={this.state.activeItem}
+					posts={this.props.posts}
 					/>
 				</Grid.Column>
 				<Grid.Column>

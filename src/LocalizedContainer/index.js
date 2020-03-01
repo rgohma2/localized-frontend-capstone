@@ -24,6 +24,7 @@ class LocalizedContainer extends React.Component {
 		this.state = {
 			businesses: [],
 			subscriptions: [],
+			posts: [],
 			newModalOpen: false,
 			addedBusiness: false,
 			busIdToShow: -1,
@@ -126,7 +127,7 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
-	// subscribes the current logged in user to the business they choose 
+	// subscribes the logged in user to the business they choose 
 	addSubscription = async (id) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/' + id
 		const response = await fetch(url, {
@@ -140,6 +141,7 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	// gets list of all subscriptions for logged in user
 	getSubscriptions = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/'
 		const response = await fetch(url, {
@@ -148,7 +150,10 @@ class LocalizedContainer extends React.Component {
 		const subJSON = await response.json()
 		console.log(subJSON);
 		if (subJSON.status === 200){
-			this.setState({subscriptions: subJSON.subscriptions})
+			this.setState({
+				subscriptions: subJSON.subscriptions,
+				posts: subJSON.data
+			})
 		}
 	}
 
@@ -201,6 +206,7 @@ class LocalizedContainer extends React.Component {
 								<h1>Newsfeed</h1>
 								<NewsfeedContainer
 								subscriptions={this.state.subscriptions}
+								posts={this.state.posts}
 								/>	
 							</Route>
 							<Switch>

@@ -10,34 +10,34 @@ class NewsfeedList extends React.Component {
 		super(props)
 
 		this.state = {
-			posts: []
+			// posts: []
 		}
 	}
 
-	componentDidMount() {
-		this.getPosts()
-	}
+	// componentDidMount() {
+	// 	this.getPosts()
+	// }
 
 
 	// temporary place to view all posts
 	// will be replaced with only posts from businesses user is subscribed to
-	getPosts = async () => {
-		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/'
-		const response = await fetch(url, {
-			credentials: 'include'
-		})
-		const postsJSON = await response.json()
-		console.log(postsJSON);
+	// getPosts = async () => {
+	// 	const url = process.env.REACT_APP_API_URL + '/api/v1/posts/'
+	// 	const response = await fetch(url, {
+	// 		credentials: 'include'
+	// 	})
+	// 	const postsJSON = await response.json()
+	// 	console.log(postsJSON);
 
-		if (postsJSON.status === 201) {
-			this.setState({
-				posts: postsJSON.data
-			})
-		}
-	}
+	// 	if (postsJSON.status === 201) {
+	// 		this.setState({
+	// 			posts: postsJSON.data
+	// 		})
+	// 	}
+	// }
 
 	render() {
-		let posts = this.state.posts
+		let posts = this.props.posts
 		if (this.props.category !== 'all') {
 			posts = posts.filter(post => post.business.category === this.props.category)
 		} 
