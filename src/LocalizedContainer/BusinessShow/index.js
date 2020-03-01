@@ -49,7 +49,7 @@ class BusinessShow extends React.Component {
 					<Button 
 					onClick={() => this.props.addSubscription(this.props.businessToShow.id)}
 					style={{marginBottom:'45px'}} 
-					size='large'>Subscribe</Button>
+					size='large' color='red'>Subscribe</Button>
 				</Segment>
 				<h1>About</h1>
 				<div>{this.props.businessToShow.about}</div>

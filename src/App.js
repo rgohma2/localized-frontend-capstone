@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       message: '',
       showMessage: false,
-      loggedIn: true,
+      loggedIn: false,
       businessOwner: false,
       business: ''
     }

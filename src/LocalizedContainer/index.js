@@ -1,6 +1,6 @@
 import React from 'react'
 import NewBusinessForm from './NewBusinessForm'
-import CategoryList from './CategoryList'
+import NewsfeedContainer from './NewsfeedContainer'
 import BusinessProfile from './BusinessProfile'
 import NewPostModal from './NewPostModal'
 import LocalBusinessesList from './LocalBusinessesList'
@@ -23,6 +23,7 @@ class LocalizedContainer extends React.Component {
 
 		this.state = {
 			businesses: [],
+			subscriptions: [],
 			newModalOpen: false,
 			addedBusiness: false,
 			busIdToShow: -1,
@@ -33,6 +34,7 @@ class LocalizedContainer extends React.Component {
 
 	componentDidMount() {
 		this.getBusinesses()
+		this.getSubscriptions()
 	}
 
 
@@ -133,6 +135,21 @@ class LocalizedContainer extends React.Component {
 		})
 		const subJSON = await response.json()
 		console.log(subJSON)
+		if (subJSON.status === 200) {
+
+		}
+	}
+
+	getSubscriptions = async () => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/'
+		const response = await fetch(url, {
+			credentials: 'include'
+		})
+		const subJSON = await response.json()
+		console.log(subJSON);
+		if (subJSON.status === 200){
+			this.setState({subscriptions: subJSON.subscriptions})
+		}
 	}
 
 
@@ -177,12 +194,14 @@ class LocalizedContainer extends React.Component {
 								<NewBusinessForm
 								addBusiness={this.addBusiness}
 								/>
-							</Route>
+							</Route>NewsfeedContainer
 						</Switch>
 						<Switch>
 							<Route path='/newsfeed'>
 								<h1>Newsfeed</h1>
-								<CategoryList/>	
+								<NewsfeedContainer
+								subscriptions={this.state.subscriptions}
+								/>	
 							</Route>
 							<Switch>
 								<Route path='/profile'>

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Menu, Grid } from 'semantic-ui-react'
+import { Menu, Grid, Segment } from 'semantic-ui-react'
 import NewsfeedList from '../NewsfeedList'
 
-class CategoryList extends React.Component {
+class NewsfeedContainer extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -56,6 +56,16 @@ class CategoryList extends React.Component {
 		              	onClick={this.handleItemClick}
 						/>
 					</Menu>
+					<Segment>
+						<h3>Subscriptions</h3>
+						{this.props.subscriptions.map(sub => {
+							return(
+								<div key={sub.id}>
+									{sub.name}
+								</div>
+							)
+						})}
+					</Segment>
 				</Grid.Column>
 				<Grid.Column>
 					<NewsfeedList
@@ -69,4 +79,4 @@ class CategoryList extends React.Component {
 	}
 }
 
-export default CategoryList
+export default NewsfeedContainer
