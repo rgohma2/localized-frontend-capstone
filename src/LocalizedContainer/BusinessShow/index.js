@@ -14,10 +14,10 @@ class BusinessShow extends React.Component {
 
 	componentDidMount() {
 		this.props.getBusiness()
-
 	}
 
 	render() {
+		console.log(this.props.posts)
 		return(
 			<div>
 				<Segment
@@ -47,6 +47,18 @@ class BusinessShow extends React.Component {
 						>{this.props.businessToShow.name}</h1>
 					</Card>
 					<Button style={{marginBottom:'45px'}} size='large'>Subscribe</Button>
+				</Segment>
+				<h1>About</h1>
+				<div>{this.props.businessToShow.about}</div>
+				<Segment>
+					{this.props.posts.map(post => {
+						return(
+							<Card key={post.id}>
+								{post.business.name}
+								{post.content}
+								{post.date}
+							</Card>
+					)})}
 				</Segment>
 			</div>
 		)

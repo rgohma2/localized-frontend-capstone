@@ -26,7 +26,8 @@ class LocalizedContainer extends React.Component {
 			newModalOpen: false,
 			addedBusiness: false,
 			busIdToShow: -1,
-			businessToShow: ''
+			businessToShow: '',
+			businessToShowPosts: []
 		}
 	}
 
@@ -96,8 +97,21 @@ class LocalizedContainer extends React.Component {
 		const busJSON = await response.json()
 		console.log(busJSON);
 		if (busJSON.status === 200 && this.state.busIdToShow !== -1){
+			this.getBusinessPosts()
 			this.setState({
 				businessToShow: busJSON.data
+			})
+		}
+	}
+
+	getBusinessPosts = async () => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.state.busIdToShow
+		const response = await fetch(url)
+		const postsJSON = await response.json()
+		console.log(postsJSON);
+		if (postsJSON.status === 200){
+			this.setState({
+				businessToShowPosts: postsJSON.data
 			})
 		}
 	}
@@ -176,6 +190,7 @@ class LocalizedContainer extends React.Component {
 									<BusinessShow 
 									getBusiness={this.getBusiness}
 									businessToShow={this.state.businessToShow}
+									posts={this.state.businessToShowPosts}
 									/>
 								</Route>
 						</Switch>
