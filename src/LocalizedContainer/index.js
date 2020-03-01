@@ -35,6 +35,8 @@ class LocalizedContainer extends React.Component {
 		this.getBusinesses()
 	}
 
+
+	// retrieves all businesses 
 	getBusinesses = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
 		const response = await fetch(url)
@@ -43,6 +45,7 @@ class LocalizedContainer extends React.Component {
 		this.setState({businesses: businessesJson.data})
 	}
 
+	// creates a business
 	addBusiness = async (businessInfo) => {
 		console.log('hi');
 		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
@@ -65,12 +68,14 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	// opens and closes modal that allows a business to make a post
 	toggleNewModal = () => {
 		this.setState({
 			newModalOpen: this.state.newModalOpen === false ? true : false
 		})
 	}
 
+	// creates a post by a particular business 
 	addPost = async (postInfo) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.props.business.id
 		const response = await fetch(url, {
@@ -85,12 +90,14 @@ class LocalizedContainer extends React.Component {
 		console.log(postJSON);
 	}
 
+	// stores id of business clicked on in state to be used to fetch data about business 
 	getBusinessId = (id) => {
 		this.setState({
 			busIdToShow: id
 		})
 	}
 
+	// gets the data of a specific business
 	getBusiness = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/' + this.state.busIdToShow
 		const response = await fetch(url)
@@ -104,6 +111,7 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	// gets all the posts for a specific business
 	getBusinessPosts = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.state.busIdToShow
 		const response = await fetch(url)
@@ -114,6 +122,11 @@ class LocalizedContainer extends React.Component {
 				businessToShowPosts: postsJSON.data
 			})
 		}
+	}
+
+	// subscribes the current logged in user to the business they choose 
+	createSubscription = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/' + id
 	}
 
 

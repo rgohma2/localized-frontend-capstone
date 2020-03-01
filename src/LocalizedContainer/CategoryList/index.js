@@ -13,7 +13,7 @@ class CategoryList extends React.Component {
 		}
 	}
 
-
+	// changes active item in state to be the name of the menu item that was clicked 
 	handleItemClick = (e, { name }) => {
 		this.setState({ activeItem: name })
 	}

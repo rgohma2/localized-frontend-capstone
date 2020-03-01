@@ -19,6 +19,7 @@ class App extends React.Component {
     }
   }
 
+  // registers a new user
   register = async (registerInfo) => {
     const url = process.env.REACT_APP_API_URL + '/api/v1/users/register'
     const response = await fetch(url, {
@@ -39,6 +40,7 @@ class App extends React.Component {
       })
   }
 
+  // logs in user after they are registered
   login = async (loginInfo) => {
     const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
     const response = await fetch(url, {
@@ -52,13 +54,14 @@ class App extends React.Component {
     const loginJSON = await response.json()
     console.log(loginJSON);
 
+    // renders 'your business profile' in nav if user logged in owns a business
+    // stores business info of user to render profile
     if (loginJSON.business !== '') {
       this.setState({
         businessOwner: true,
         business: loginJSON.business
       })
     }
-
     this.setState({
         message: loginJSON.message,
         showMessage: true,
@@ -66,11 +69,14 @@ class App extends React.Component {
       })
   }
 
+  // switches message show to be hidden
   hideMessage = (bool) => {
     if (bool === true) {
       this.setState({showMessage: false})
     }
   }
+
+
 
   logout = (bool) => {
     console.log('logout');
@@ -82,9 +88,8 @@ class App extends React.Component {
     }
   }
 
-  // when a business is created by a user their new business is
-  // stored in state to create their profile and they become a business
-  // owner which gives them the optionto view their profile in nav bar
+  // switches user to business owner once they add their business
+  // user will then be redirected to their business profile
   renderNewBusiness = (newBusiness) => {
     this.setState({
       business: newBusiness,
