@@ -90,7 +90,9 @@ class LocalizedContainer extends React.Component {
 	        }
 		})
 		const postJSON = await response.json()
-		console.log(postJSON);
+		if (postJSON.status === 200) {
+			this.getSubscriptions()
+		}
 	}
 
 	// stores id of business clicked on in state to be used to fetch data about business 
