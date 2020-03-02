@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Menu, Grid, Segment } from 'semantic-ui-react'
 import NewsfeedList from '../NewsfeedList'
+import { Link } from 'react-router-dom'
 
 class NewsfeedContainer extends React.Component {
 
@@ -61,7 +62,7 @@ class NewsfeedContainer extends React.Component {
 						{this.props.subscriptions.map(sub => {
 							return(
 								<div key={sub.id}>
-									{sub.name}
+									<Link onClick={() => this.props.getBusinessId(sub.id)} to={'/show/' + sub.id}>{sub.name}</Link>
 								</div>
 							)
 						})}

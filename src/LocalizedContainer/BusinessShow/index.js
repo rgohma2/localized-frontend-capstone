@@ -8,7 +8,7 @@ class BusinessShow extends React.Component {
 		super(props)
 
 		this.state = {
-
+			
 		}
 	}
 
@@ -16,12 +16,7 @@ class BusinessShow extends React.Component {
 		this.props.getBusiness()
 	}
 
-
-
-
 	render() {
-		console.log(this.props.posts)
-		console.log(this.props.subscribed);
 		return(
 			<div>
 				<Segment
@@ -50,14 +45,17 @@ class BusinessShow extends React.Component {
 						}}
 						>{this.props.businessToShow.name}</h1>
 					</Card>
-					<Button 
-					onClick={() => {
+					<Button
+					onClick={
 							this.props.subscribed === false
 							?
-							this.props.addSubscription(this.props.businessToShow.id)
+							() => {
+								this.props.addSubscription(this.props.businessToShow.id)
+							}
 							:
-							this.props.removeSubscription(this.props.businessToShow.id)
-						}
+							() => {
+								this.props.removeSubscription(this.props.businessToShow.id)
+							}
 					}
 					style={{marginBottom:'45px'}} 
 					size='large' 
@@ -68,16 +66,20 @@ class BusinessShow extends React.Component {
 						'red'
 						:
 						null
-					}
-					>
-					Subscribe{this.props.subscribed === true ? 'd ' : null}
+					}>
+
 					{
 						this.props.subscribed === true
 						?
-						<Icon name='check circle'/>
+						<Button.Content>
+							Subscribed	
+							<Icon name='check circle'/>
+						</Button.Content> 
 						:
-						null
-					} 
+						<Button.Content>
+							Subscribe
+						</Button.Content> 
+					}
 					</Button>
 				</Segment>
 				<h1>About</h1>

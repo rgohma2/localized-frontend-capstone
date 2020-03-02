@@ -24,13 +24,14 @@ class LocalizedContainer extends React.Component {
 		this.state = {
 			businesses: [],
 			subscriptions: [],
-			subscribed: false,
 			posts: [],
+			subscribed: false,
 			newModalOpen: false,
 			addedBusiness: false,
 			busIdToShow: -1,
 			businessToShow: '',
-			businessToShowPosts: []
+			businessToShowPosts: [],
+			buttonState: null
 		}
 	}
 
@@ -155,7 +156,9 @@ class LocalizedContainer extends React.Component {
 		const subJSON = await response.json()
 		console.log(subJSON)
 		if (subJSON.status === 200) {
-			this.setState({subscribed: true})
+			this.setState({
+				subscribed: true
+			})
 			this.getSubscriptions()
 		}
 	}
@@ -169,7 +172,9 @@ class LocalizedContainer extends React.Component {
 		const subJSON = await response.json()
 		console.log(subJSON)
 		if (subJSON.status === 200) {
-			this.setState({subscribed: false})
+			this.setState({
+			subscribed: false
+		})
 			this.getSubscriptions()
 		}
 	}
@@ -240,6 +245,7 @@ class LocalizedContainer extends React.Component {
 							<Route path='/newsfeed'>
 								<h1>Newsfeed</h1>
 								<NewsfeedContainer
+								getBusinessId={this.getBusinessId}
 								subscriptions={this.state.subscriptions}
 								posts={this.state.posts}
 								/>	
@@ -275,6 +281,7 @@ class LocalizedContainer extends React.Component {
 									subscribed={this.state.subscribed}
 									checkIfSubscribed={this.checkIfSubscribed}
 									removeSubscription={this.removeSubscription}
+									buttonState={this.state.buttonState}
 									/>
 								</Route>
 						</Switch>
