@@ -16,6 +16,12 @@ class CommentsContainer extends React.Component {
 		this.props.getComments()
 	}
 
+	componentDidUpdate(prev) {
+		if (this.props.comments !== prev.comments) {
+			this.props.getComments()
+		}
+	}
+
 	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -25,6 +31,9 @@ class CommentsContainer extends React.Component {
 	handleSubmit = (event) => {
 		event.preventDefault()
 		this.props.addComment(this.state)
+		this.setState({
+			content: ''
+		})
 	}
 
 	render() {

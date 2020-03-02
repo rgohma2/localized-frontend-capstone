@@ -33,9 +33,6 @@ class NewsfeedContainer extends React.Component {
 	        }
 		})
 		const commentJSON = await response.json()
-		if (commentJSON.status === 200){
-			this.getComments()
-		}
 	}
 
 	getComments = async () => {
@@ -46,7 +43,7 @@ class NewsfeedContainer extends React.Component {
 		const commentJSON = await response.json()
 		if (commentJSON.status === 200){
 			this.setState({
-				comments: commentJSON.data
+				comments: commentJSON.data,
 			})
 		}
 	}
@@ -113,20 +110,20 @@ class NewsfeedContainer extends React.Component {
 					getPostId={this.getPostId}
 					/>
 				</Grid.Column>
+				<Grid.Column>
 				{
 					this.state.postId !== -1
 					?
-					<Grid.Column>
 						<CommentsContainer
 						addComment={this.addComment}
 						getComments={this.getComments}
 						comments={this.state.comments}
 						/>
-					</Grid.Column>
 					:
 					null
 
 				}
+				</Grid.Column>
 			</Grid>
 		)	
 	}
