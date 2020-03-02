@@ -1,6 +1,12 @@
 import React from 'react'
 
-import {Form, Label, Button, Modal} from 'semantic-ui-react'
+
+import { Form, Label, Button, Modal } from 'semantic-ui-react'
+
+import axios from 'axios'
+
+import { Image } from 'cloudinary-react'
+
 
 class NewPostModal extends React.Component {
 	constructor() {
@@ -9,7 +15,8 @@ class NewPostModal extends React.Component {
 
 		this.state = {
 			image: '',
-			content: ''
+			content: '',
+			formData: null
 		}
 	}
 
@@ -19,9 +26,36 @@ class NewPostModal extends React.Component {
 		})
 	}
 
-	handleSubmit = (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault()
+		await axios.post('https://api.cloudinary.com/v1_1/localized/upload', this.state.formData)
+		.then( res => {
+			console.log(res);
+			if (res.status === 200) {
+				this.setState({
+					image: res.data.secure_url,
+				})
+			}
+		})
+		this.submit()
+	}
+
+	submit = () => {
 		this.props.addPost(this.state)
+	}
+
+	handleUploadChange = async (e) => {
+		const file = e.target.files[0]
+		const fd = new FormData()
+		fd.append('upload_preset', 'randyGohmann')
+		fd.append('file', file)
+		this.setState({
+			formData: fd
+		})
+	}
+
+	fileUploadHandler = () => {
+		
 	}
 
 	render() {
@@ -34,11 +68,10 @@ class NewPostModal extends React.Component {
 			<Modal.Content>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Input
-					type='text'
+					type='file'
 					label='Photo'
 					name='image'
-					value={this.state.image}
-					onChange={this.handleChange}
+					onChange={this.handleUploadChange}
 					/>
 					<Form.Input
 					type='text'
