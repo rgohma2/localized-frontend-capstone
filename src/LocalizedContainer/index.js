@@ -195,6 +195,11 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	addComment = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + id
+
+	}
+
 
 
 

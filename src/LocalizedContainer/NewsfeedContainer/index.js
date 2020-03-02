@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Menu, Grid, Segment } from 'semantic-ui-react'
 import NewsfeedList from '../NewsfeedList'
+import CommentsContainer from '../CommentsContainer'
 import { Link } from 'react-router-dom'
 
 class NewsfeedContainer extends React.Component {
@@ -10,7 +11,9 @@ class NewsfeedContainer extends React.Component {
 		super(props)
 
 		this.state = {
-			activeItem: 'all'
+			activeItem: 'all',
+			postId: -1,
+			comments: []
 		}
 	}
 
@@ -19,10 +22,45 @@ class NewsfeedContainer extends React.Component {
 		this.setState({ activeItem: name })
 	}
 
+	addComment = async (commentInfo) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + this.state.postId
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'POST',
+	        body: JSON.stringify(commentInfo),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
+		})
+		const commentJSON = await response.json()
+		if (commentJSON.status === 200){
+			this.getComments()
+		}
+	}
+
+	getComments = async () => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + this.state.postId
+		const response = await fetch(url, {
+			credentials: 'include'
+		})
+		const commentJSON = await response.json()
+		if (commentJSON.status === 200){
+			this.setState({
+				comments: commentJSON.data
+			})
+		}
+	}
+
+	getPostId = (id) => {
+		this.setState({
+			postId: id
+		})	
+	}
+
 	render(){
 		const { activeItem } = this.state
 		return(
-			<Grid centered columns={2} divided>
+			<Grid centered columns={3} divided>
 				<Grid.Column>
 					<Menu vertical fluid>
 
@@ -72,10 +110,23 @@ class NewsfeedContainer extends React.Component {
 					<NewsfeedList
 					category={this.state.activeItem}
 					posts={this.props.posts}
+					getPostId={this.getPostId}
 					/>
 				</Grid.Column>
-				<Grid.Column>
-				</Grid.Column>
+				{
+					this.state.postId !== -1
+					?
+					<Grid.Column>
+						<CommentsContainer
+						addComment={this.addComment}
+						getComments={this.getComments}
+						comments={this.state.comments}
+						/>
+					</Grid.Column>
+					:
+					null
+
+				}
 			</Grid>
 		)	
 	}

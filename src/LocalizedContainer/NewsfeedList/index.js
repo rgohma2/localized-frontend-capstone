@@ -34,10 +34,11 @@ class NewsfeedList extends React.Component {
 								{post.content}
 								<br />
 								{post.date}
+								<div onClick={() => this.props.getPostId(post.id)}>comments</div>
 							</Card>
 					)})
 					:
-					"Subscribe to businesses to stay up to date on their posts!"
+					"Subscribe to businesses to view their latest posts here!"
 				}
 			</Segment>
 		)
