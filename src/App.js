@@ -56,17 +56,22 @@ class App extends React.Component {
 
     // renders 'your business profile' in nav if user logged in owns a business
     // stores business info of user to render profile
-    if (loginJSON.business !== '') {
-      this.setState({
-        businessOwner: true,
-        business: loginJSON.business
-      })
-    }
     this.setState({
-        message: loginJSON.message,
-        showMessage: true,
-        loggedIn: true
-      })
+      message: loginJSON.message,
+      showMessage: true,
+    })
+    
+    if (loginJSON.status === 201) {
+        if (loginJSON.business !== '') {
+          this.setState({
+            businessOwner: true,
+            business: loginJSON.business
+          })
+        }
+        this.setState({
+            loggedIn: true
+        })
+    }
   }
 
   // switches message show to be hidden

@@ -24,6 +24,7 @@ class LocalizedContainer extends React.Component {
 		this.state = {
 			businesses: [],
 			subscriptions: [],
+			subscribed: false,
 			posts: [],
 			newModalOpen: false,
 			addedBusiness: false,
@@ -110,10 +111,24 @@ class LocalizedContainer extends React.Component {
 		console.log(busJSON);
 		if (busJSON.status === 200 && this.state.busIdToShow !== -1){
 			this.getBusinessPosts()
+			this.checkIfSubscribed() 
 			this.setState({
 				businessToShow: busJSON.data
 			})
 		}
+	}
+
+	checkIfSubscribed = () => {
+		this.state.subscriptions.forEach(sub => {
+			console.log(this.state.busIdToShow);
+			if (sub.id === this.state.busIdToShow) {
+			console.log(sub.id);
+			console.log(this.state.busIdToShow);
+				this.setState({
+					subscribed: true
+				})
+			}
+		})
 	}
 
 	// gets all the posts for a specific business
@@ -158,6 +173,8 @@ class LocalizedContainer extends React.Component {
 			})
 		}
 	}
+
+
 
 
 	render() {
@@ -238,6 +255,8 @@ class LocalizedContainer extends React.Component {
 									businessToShow={this.state.businessToShow}
 									posts={this.state.businessToShowPosts}
 									addSubscription={this.addSubscription}
+									subscriptions={this.state.subscriptions}
+									subscribed={this.state.subscribed}
 									/>
 								</Route>
 						</Switch>

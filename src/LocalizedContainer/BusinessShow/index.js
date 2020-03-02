@@ -16,8 +16,11 @@ class BusinessShow extends React.Component {
 		this.props.getBusiness()
 	}
 
+
+
 	render() {
 		console.log(this.props.posts)
+		console.log(this.props.subscribed);
 		return(
 			<div>
 				<Segment
@@ -47,9 +50,24 @@ class BusinessShow extends React.Component {
 						>{this.props.businessToShow.name}</h1>
 					</Card>
 					<Button 
-					onClick={() => this.props.addSubscription(this.props.businessToShow.id)}
+					onClick={() => {
+							this.props.addSubscription(this.props.businessToShow.id)
+							this.props.getBusiness()
+						}
+					}
 					style={{marginBottom:'45px'}} 
-					size='large' color='red'>Subscribe</Button>
+					size='large' 
+					color= 
+					{
+						this.props.subscribed === false
+						?
+						'red'
+						:
+						'gray'
+					}
+					>
+					Subscribe
+					</Button>
 				</Segment>
 				<h1>About</h1>
 				<div>{this.props.businessToShow.about}</div>
