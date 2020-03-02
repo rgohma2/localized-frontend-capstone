@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Segment, Card, Button, Image } from 'semantic-ui-react'
+import { Grid, Segment, Card, Button, Image, Icon } from 'semantic-ui-react'
 
 class BusinessShow extends React.Component {
 	constructor(props) {
@@ -15,6 +15,8 @@ class BusinessShow extends React.Component {
 	componentDidMount() {
 		this.props.getBusiness()
 	}
+
+
 
 
 	render() {
@@ -44,14 +46,13 @@ class BusinessShow extends React.Component {
 							display:'flex',
 							alignSelf:'center',
 							marginTop: '5px',
-							fontSize: '5em'
+							fontSize: '4em'
 						}}
 						>{this.props.businessToShow.name}</h1>
 					</Card>
 					<Button 
 					onClick={() => {
 							this.props.addSubscription(this.props.businessToShow.id)
-							this.props.getBusiness()
 						}
 					}
 					style={{marginBottom:'45px'}} 
@@ -65,7 +66,14 @@ class BusinessShow extends React.Component {
 						'gray'
 					}
 					>
-					Subscribe
+					Subscribe{this.props.subscribed === true ? 'd ' : null}
+					{
+						this.props.subscribed === true
+						?
+						<Icon name='check circle'/>
+						:
+						null
+					} 
 					</Button>
 				</Segment>
 				<h1>About</h1>

@@ -155,8 +155,8 @@ class LocalizedContainer extends React.Component {
 		const subJSON = await response.json()
 		console.log(subJSON)
 		if (subJSON.status === 200) {
+			this.setState({subscribed: true})
 			this.getSubscriptions()
-			this.checkIfSubscribed()
 		}
 	}
 
@@ -259,6 +259,7 @@ class LocalizedContainer extends React.Component {
 									addSubscription={this.addSubscription}
 									subscriptions={this.state.subscriptions}
 									subscribed={this.state.subscribed}
+									checkIfSubscribed={this.checkIfSubscribed}
 									/>
 								</Route>
 						</Switch>
