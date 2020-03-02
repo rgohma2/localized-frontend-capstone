@@ -45,7 +45,7 @@ class CommentsContainer extends React.Component {
 					justifyContent: 'flex-end'
 				}}
 				>
-					<Icon onClick={() => this.props.getPostId(-1)}name='close'/>
+					<Icon style={{cursor: 'pointer'}} onClick={() => this.props.getPostId(-1)}name='close'/>
 				</div>
 				<h2>{this.props.post.content}</h2>
 				{this.props.comments.map(comment => {

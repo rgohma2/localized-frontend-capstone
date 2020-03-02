@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, Segment, Image } from 'semantic-ui-react'
 
-
+import { Link } from 'react-router-dom'
 
 class NewsfeedList extends React.Component {
 	constructor(props) {
@@ -34,10 +34,10 @@ class NewsfeedList extends React.Component {
 								{post.content}
 								<br />
 								{post.date}
-								<div onClick={() => {
+								<Link to='/newsfeed'><div as='a' onClick={() => {
 									this.props.getPostId(post.id)
 									this.props.getPost(post)
-								}}>View Comments</div>
+								}}>View Comments</div></Link>
 							</Card>
 					)})
 					:
