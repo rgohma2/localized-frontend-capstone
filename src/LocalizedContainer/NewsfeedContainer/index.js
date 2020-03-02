@@ -13,6 +13,7 @@ class NewsfeedContainer extends React.Component {
 		this.state = {
 			activeItem: 'all',
 			postId: -1,
+			post: '',
 			comments: []
 		}
 	}
@@ -46,6 +47,11 @@ class NewsfeedContainer extends React.Component {
 				comments: commentJSON.data,
 			})
 		}
+	}
+	getPost = (post) => {
+		this.setState({
+			post: post
+		})
 	}
 
 	getPostId = (id) => {
@@ -108,6 +114,7 @@ class NewsfeedContainer extends React.Component {
 					category={this.state.activeItem}
 					posts={this.props.posts}
 					getPostId={this.getPostId}
+					getPost={this.getPost}
 					/>
 				</Grid.Column>
 				<Grid.Column>
@@ -118,6 +125,8 @@ class NewsfeedContainer extends React.Component {
 						addComment={this.addComment}
 						getComments={this.getComments}
 						comments={this.state.comments}
+						getPostId={this.getPostId}
+						post={this.state.post}
 						/>
 					:
 					null

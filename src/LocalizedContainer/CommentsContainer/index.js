@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Segment, Button, Form, TextArea, Card } from 'semantic-ui-react'
+import { Segment, Button, Form, TextArea, Card, Icon } from 'semantic-ui-react'
 
 class CommentsContainer extends React.Component {
 	constructor() {
@@ -39,6 +39,15 @@ class CommentsContainer extends React.Component {
 	render() {
 		return(
 			<Segment>
+				<div
+				style={{
+					display: 'flex',
+					justifyContent: 'flex-end'
+				}}
+				>
+					<Icon onClick={() => this.props.getPostId(-1)}name='close'/>
+				</div>
+				<h2>{this.props.post.content}</h2>
 				{this.props.comments.map(comment => {
 					return (
 						<Card key={comment.id}>

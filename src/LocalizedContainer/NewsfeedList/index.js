@@ -36,6 +36,7 @@ class NewsfeedList extends React.Component {
 								{post.date}
 								<div onClick={() => {
 									this.props.getPostId(post.id)
+									this.props.getPost(post)
 								}}>View Comments</div>
 							</Card>
 					)})
