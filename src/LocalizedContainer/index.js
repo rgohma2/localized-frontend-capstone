@@ -109,25 +109,26 @@ class LocalizedContainer extends React.Component {
 		const response = await fetch(url)
 		const busJSON = await response.json()
 		console.log(busJSON);
+		this.checkIfSubscribed()
 		if (busJSON.status === 200 && this.state.busIdToShow !== -1){
-			this.getBusinessPosts()
-			this.checkIfSubscribed() 
+			this.getBusinessPosts() 
 			this.setState({
 				businessToShow: busJSON.data
 			})
 		}
 	}
 
+
+	// changes state to true if logged in user is subscribed to the business being viewed 
 	checkIfSubscribed = () => {
+		let subscribed = false
 		this.state.subscriptions.forEach(sub => {
-			console.log(this.state.busIdToShow);
 			if (sub.id === this.state.busIdToShow) {
-			console.log(sub.id);
-			console.log(this.state.busIdToShow);
-				this.setState({
-					subscribed: true
-				})
-			}
+				subscribed = true
+			} 
+		})
+		this.setState({
+			subscribed: subscribed
 		})
 	}
 
@@ -155,6 +156,7 @@ class LocalizedContainer extends React.Component {
 		console.log(subJSON)
 		if (subJSON.status === 200) {
 			this.getSubscriptions()
+			this.checkIfSubscribed()
 		}
 	}
 
