@@ -36,11 +36,11 @@ class NewBusinessForm extends React.Component {
 	getOptions = () => {
 		return (
 		[
-			{key: 4, text: 'Agriculture', value: 'agriculture'},
-			{key: 3, text: 'Clothing', value: 'clothing'},
-			{key: 4, text: 'Drink', value: 'drink'},
-			{key: 1, text: 'Food', value: 'food'},
-			{key: 2, text: 'Technology', value: 'technology'},
+			{key: 1, text: 'Agriculture', value: 'agriculture'},
+			{key: 2, text: 'Clothing', value: 'clothing'},
+			{key: 3, text: 'Drink', value: 'drink'},
+			{key: 4, text: 'Food', value: 'food'},
+			{key: 5, text: 'Technology', value: 'technology'},
 		]
 	)}
 

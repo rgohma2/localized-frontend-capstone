@@ -52,7 +52,11 @@ class BusinessShow extends React.Component {
 					</Card>
 					<Button 
 					onClick={() => {
+							this.props.subscribed === false
+							?
 							this.props.addSubscription(this.props.businessToShow.id)
+							:
+							this.props.removeSubscription(this.props.businessToShow.id)
 						}
 					}
 					style={{marginBottom:'45px'}} 
@@ -63,7 +67,7 @@ class BusinessShow extends React.Component {
 						?
 						'red'
 						:
-						'gray'
+						null
 					}
 					>
 					Subscribe{this.props.subscribed === true ? 'd ' : null}

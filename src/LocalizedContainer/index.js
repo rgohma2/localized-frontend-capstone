@@ -160,6 +160,20 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	removeSubscription = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/' + id
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'DELETE'
+		})
+		const subJSON = await response.json()
+		console.log(subJSON)
+		if (subJSON.status === 200) {
+			this.setState({subscribed: false})
+			this.getSubscriptions()
+		}
+	}
+
 	// gets list of all subscriptions for logged in user
 	getSubscriptions = async () => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/'
@@ -260,6 +274,7 @@ class LocalizedContainer extends React.Component {
 									subscriptions={this.state.subscriptions}
 									subscribed={this.state.subscribed}
 									checkIfSubscribed={this.checkIfSubscribed}
+									removeSubscription={this.removeSubscription}
 									/>
 								</Route>
 						</Switch>
