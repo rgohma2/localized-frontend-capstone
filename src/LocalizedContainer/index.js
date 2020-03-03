@@ -25,6 +25,7 @@ class LocalizedContainer extends React.Component {
 			businesses: [],
 			subscriptions: [],
 			posts: [],
+			userBusinessPosts: [],
 			subscribed: false,
 			newModalOpen: false,
 			addedBusiness: false,
@@ -146,6 +147,18 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	getUserBusinessPosts = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + id
+		const response = await fetch(url)
+		const postsJSON = await response.json()
+		console.log(postsJSON);
+		if (postsJSON.status === 200){
+			this.setState({
+				userBusinessPosts: postsJSON.data
+			})
+		}
+	}
+
 	// subscribes the logged in user to the business they choose 
 	addSubscription = async (id) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/subscriptions/' + id
@@ -256,6 +269,8 @@ class LocalizedContainer extends React.Component {
 									<BusinessProfile
 									toggleNewModal={this.toggleNewModal}
 									business={this.props.business}
+									getUserBusinessPosts={this.getUserBusinessPosts}
+									posts={this.state.userBusinessPosts}
 									/>
 									{
 										this.state.newModalOpen === true

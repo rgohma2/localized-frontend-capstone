@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Segment, Card, Button } from 'semantic-ui-react'
+import { Grid, Segment, Card, Button, Image } from 'semantic-ui-react'
 
 class BusinessProfile extends React.Component {
 	constructor(props) {
@@ -10,6 +10,10 @@ class BusinessProfile extends React.Component {
 		this.state = {
 
 		}
+	}
+
+	componentDidMount() {
+		this.props.getUserBusinessPosts(this.props.business.id)
 	}
 
 	render() {
@@ -43,6 +47,20 @@ class BusinessProfile extends React.Component {
 						>{this.props.business.name}</h1>
 					</Card>
 					<Button onClick={this.props.toggleNewModal} style={{marginBottom:'45px'}} size='large'>Make New Post</Button>
+				</Segment>
+				<h1>About</h1>
+				<div>{this.props.business.about}</div>
+				<Segment>
+					{this.props.posts.map(post => {
+						return(
+							<Card key={post.id}>
+								{post.business.name}
+								<Image src={post.image}/>
+								{post.content}
+								<br />
+								{post.date}
+							</Card>
+					)})}
 				</Segment>
 			</div>
 		)

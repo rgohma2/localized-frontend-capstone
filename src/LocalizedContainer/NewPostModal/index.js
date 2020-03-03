@@ -54,9 +54,6 @@ class NewPostModal extends React.Component {
 		})
 	}
 
-	fileUploadHandler = () => {
-		
-	}
 
 	render() {
 		return(
