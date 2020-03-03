@@ -34,10 +34,10 @@ class NewsfeedList extends React.Component {
 								{post.content}
 								<br />
 								{post.date}
-								<Link to='/newsfeed'><div as='a' onClick={() => {
+								<div as='a' onClick={() => {
 									this.props.getPostId(post.id)
 									this.props.getPost(post)
-								}}>View Comments</div></Link>
+								}}>View Comments</div>
 							</Card>
 					)})
 					:

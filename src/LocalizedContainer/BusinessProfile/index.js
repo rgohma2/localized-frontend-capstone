@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Segment, Card, Button, Image, Icon } from 'semantic-ui-react'
+import { Grid, Segment, Card, Button, Image, Icon, Dropdown, Menu } from 'semantic-ui-react'
 
 class BusinessProfile extends React.Component {
 	constructor(props) {
@@ -23,6 +23,15 @@ class BusinessProfile extends React.Component {
 	render() {
 		return(
 			<div>
+			<Menu vertical>
+			    <Dropdown item text='Settings'>
+				    <Dropdown.Menu>
+					    <Dropdown.Item>Change Banner</Dropdown.Item>
+					    <Dropdown.Item>Edit Business</Dropdown.Item>
+					    <Dropdown.Item onClick={() => this.props.deleteBusiness(this.props.business.id)}>Delete Business</Dropdown.Item>
+				    </Dropdown.Menu>
+			    </Dropdown>
+	  		</Menu>
 				<Segment
 				style={{
 					display:'flex',
@@ -52,8 +61,14 @@ class BusinessProfile extends React.Component {
 					</Card>
 					<Button onClick={this.props.toggleNewModal} style={{marginBottom:'45px'}} size='large'>Make New Post</Button>
 				</Segment>
-				<h1>About</h1>
-				<div>{this.props.business.about}</div>
+				<div style={{
+					display: 'flex'
+				}}>
+					<div>
+						<h1>About</h1>
+						{this.props.business.about}
+					</div>
+				</div>
 				<Segment>
 					{this.props.posts.map(post => {
 						return(

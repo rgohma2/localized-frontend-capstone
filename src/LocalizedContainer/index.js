@@ -169,6 +169,17 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	deleteBusiness = async (id) => {
+		console.log(id);
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/' + id
+		const response = await fetch(url, {
+			credentials: 'include',
+			method: 'DELETE'
+		})
+		const busJSON = await response.json()
+		console.log(busJSON);
+	}
+
 
 	// changes state to true if logged in user is subscribed to the business being viewed 
 	checkIfSubscribed = () => {
@@ -316,6 +327,7 @@ class LocalizedContainer extends React.Component {
 									<BusinessProfile
 									toggleNewModal={this.toggleNewModal}
 									business={this.props.business}
+									deleteBusiness={this.deleteBusiness}
 									getUserBusinessPosts={this.getUserBusinessPosts}
 									posts={this.state.userBusinessPosts}
 									deletePost={this.deletePost}
