@@ -6,7 +6,7 @@ import { Form, Label, Button, Modal } from 'semantic-ui-react'
 import axios from 'axios'
 
 
-class NewPostModal extends React.Component {
+class EditPostModal extends React.Component {
 	constructor() {
 
 		super()
@@ -58,8 +58,8 @@ class NewPostModal extends React.Component {
 			<Modal 
 			open={true} 
 			closeIcon={true} 
-			onClose={this.props.toggleNewModal}>
-			<Modal.Header>Make New Post</Modal.Header>
+			onClose={this.props.closeEditModal}>
+			<Modal.Header>Edit Post</Modal.Header>
 			<Modal.Content>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Input
@@ -83,4 +83,4 @@ class NewPostModal extends React.Component {
 	}
 }
 
-export default NewPostModal
+export default EditPostModal

@@ -3,6 +3,7 @@ import NewBusinessForm from './NewBusinessForm'
 import NewsfeedContainer from './NewsfeedContainer'
 import BusinessProfile from './BusinessProfile'
 import NewPostModal from './NewPostModal'
+import EditPostModal from './EditPostModal'
 import LocalBusinessesList from './LocalBusinessesList'
 import BusinessShow from './BusinessShow'
 
@@ -32,7 +33,8 @@ class LocalizedContainer extends React.Component {
 			busIdToShow: -1,
 			businessToShow: '',
 			businessToShowPosts: [],
-			buttonState: null
+			buttonState: null,
+			idOfPostToEdit: -1
 		}
 	}
 
@@ -81,6 +83,12 @@ class LocalizedContainer extends React.Component {
 		})
 	}
 
+	closeEditModal = () => {
+		this.setState({
+			idOfPostToEdit: -1
+		})
+	}
+
 	// creates a post by a particular business 
 	addPost = async (postInfo) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.props.business.id
@@ -106,6 +114,12 @@ class LocalizedContainer extends React.Component {
 	    })
 	    const postJSON = await response.json()
 	    console.log(postJSON);
+	}
+
+	editPost = (id) => {
+		this.setState({
+			idOfPostToEdit: id
+		})
 	}
 
 	// stores id of business clicked on in state to be used to fetch data about business 
@@ -280,7 +294,7 @@ class LocalizedContainer extends React.Component {
 									getUserBusinessPosts={this.getUserBusinessPosts}
 									posts={this.state.userBusinessPosts}
 									deletePost={this.deletePost}
-									// editPost={this.editPost}
+									editPost={this.editPost}
 									/>
 									{
 										this.state.newModalOpen === true
@@ -288,6 +302,15 @@ class LocalizedContainer extends React.Component {
 										<NewPostModal
 										toggleNewModal={this.toggleNewModal}
 										addPost={this.addPost}
+										/>	
+										:
+										null
+									}
+									{
+										this.state.idOfPostToEdit !== -1
+										?
+										<EditPostModal
+										closeEditModal={this.closeEditModal}
 										/>	
 										:
 										null

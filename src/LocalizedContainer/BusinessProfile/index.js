@@ -74,7 +74,7 @@ class BusinessProfile extends React.Component {
 								{post.date}
 								</Card.Content>
 								<Button.Group>
-									<Button onClick={() => this.props.deletePost(post.id)}>Edit</Button>
+									<Button onClick={() => this.props.editPost(post.id)}>Edit</Button>
 									<Button onClick={() => this.props.deletePost(post.id)}>Delete</Button>
 								</Button.Group>
 							</Card>
