@@ -6,6 +6,8 @@ import NewPostModal from './NewPostModal'
 import EditPostModal from './EditPostModal'
 import LocalBusinessesList from './LocalBusinessesList'
 import BusinessShow from './BusinessShow'
+import BusinessEditModal from './BusinessEditModal'
+
 
 import { Segment } from 'semantic-ui-react'
 
@@ -34,7 +36,8 @@ class LocalizedContainer extends React.Component {
 			businessToShow: '',
 			businessToShowPosts: [],
 			buttonState: null,
-			idOfPostToEdit: -1
+			idOfPostToEdit: -1,
+			editBusiness: false
 		}
 	}
 
@@ -178,6 +181,29 @@ class LocalizedContainer extends React.Component {
 		})
 		const busJSON = await response.json()
 		console.log(busJSON);
+		if (busJSON.status === 200) {
+			this.props.notBusinessOwner()
+		}
+	}
+
+	toggleEditBusiness = () => {
+		this.setState({
+			editBusiness: this.state.editBusiness === false ? true : false
+		})
+	}
+
+	updateBusiness = async (businessInfo) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/' + this.props.business.id
+		const response = await fetch(url, {
+			credentials: 'include',
+			method: 'PUT',
+			body: JSON.stringify(businessInfo),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
+	    })
+	        const busJSON = await response.json()
+	        console.log(busJSON)
 	}
 
 
@@ -269,6 +295,7 @@ class LocalizedContainer extends React.Component {
 
 
 
+
 	render() {
 		return(
 			<div>
@@ -332,6 +359,7 @@ class LocalizedContainer extends React.Component {
 									posts={this.state.userBusinessPosts}
 									deletePost={this.deletePost}
 									editPost={this.editPost}
+									toggleEditBusiness={this.toggleEditBusiness}
 									/>
 									{
 										this.state.newModalOpen === true
@@ -350,6 +378,17 @@ class LocalizedContainer extends React.Component {
 										closeEditModal={this.closeEditModal}
 										post={this.state.userBusinessPosts.find(post => post.id === this.state.idOfPostToEdit)}
 										updatePost={this.updatePost}
+										/>	
+										:
+										null
+									}
+									{
+										this.state.editBusiness === true
+										?
+										<BusinessEditModal
+										toggleEditBusiness={this.toggleEditBusiness}
+										updateBusiness={this.updateBusiness}
+										business={this.props.business}
 										/>	
 										:
 										null
@@ -376,6 +415,13 @@ class LocalizedContainer extends React.Component {
 						this.state.addedBusiness === true
 						?
 						<Redirect to='/profile'/>
+						:
+						null
+					}
+					{
+						this.props.businessOwner === false
+						?
+						<Redirect to='/new'/>
 						:
 						null
 					}

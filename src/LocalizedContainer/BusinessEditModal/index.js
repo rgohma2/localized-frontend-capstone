@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Form, Button, Grid, Segment} from 'semantic-ui-react'
+import { Form, Button, Grid, Segment, Modal} from 'semantic-ui-react'
 
-class NewBusinessForm extends React.Component {
+class BusinessEditModal extends React.Component {
 	constructor(props) {
 
 		super(props)
@@ -22,6 +22,21 @@ class NewBusinessForm extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		this.setState({
+			name: this.props.business.name,
+			category: this.props.business.category,
+			image: this.props.business.image,
+			about: this.props.business.about,
+			address_1: this.props.business.address.address_1,
+			address_2: this.props.business.address.address_2,
+			city: this.props.business.address.city, 
+			state: this.props.business.address.state, 
+			zip_code: this.props.business.address.zip_code, 
+			country: this.props.business.address.country
+		})
+	}
+
 	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -30,7 +45,7 @@ class NewBusinessForm extends React.Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		this.props.addBusiness(this.state)
+		this.props.updateBusiness(this.state)
 	}
 
 	getOptions = () => {
@@ -46,23 +61,18 @@ class NewBusinessForm extends React.Component {
 
 	render() {
 		return(
-			<Grid centered>
-				<div 
-				style={{
-					marginTop: '50px'
-				}}
-				>
-					<Segment
-					style={{
-						boxShadow: '0px 8px 15px -6px black'
-					}}
-					>
+			<Modal
+			open={true} 
+			closeIcon={true} 
+			onClose={this.props.toggleEditBusiness}>
+			>
+				<Grid centered style={{marginBottom:'20px'}}>
 					<Grid.Row
 					style={{
-						marginBottom:'26px'
+						marginBottom:'10px'
 					}}
 					>
-						<h1>New Business</h1>
+						<h1>Edit Business</h1>
 					</Grid.Row>
 					<Grid.Row>
 						<Form onSubmit={this.handleSubmit}>
@@ -78,10 +88,11 @@ class NewBusinessForm extends React.Component {
 								label="Business Name" 
 								type="text" 
 								name="name"
-								value={this.state.business_name}
+								value={this.state.name}
 								onChange={this.handleChange}
 								/>
 								<Form.Select
+								defaultValue={this.state.category}
 								fluid
 								label="Category"
 								name='category'
@@ -168,11 +179,10 @@ class NewBusinessForm extends React.Component {
 						</Form.Field>
 						</Form>
 					</Grid.Row>
-					</Segment>
-				</div>
-			</Grid>
+				</Grid>
+			</Modal>
 		)
 	}
 }
 
-export default NewBusinessForm
+export default BusinessEditModal

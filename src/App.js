@@ -60,7 +60,7 @@ class App extends React.Component {
       message: loginJSON.message,
       showMessage: true,
     })
-    
+
     if (loginJSON.status === 201) {
         if (loginJSON.business !== '') {
           this.setState({
@@ -102,6 +102,12 @@ class App extends React.Component {
     })
   }
 
+ notBusinessOwner = () => {
+  this.setState({
+    businessOwner: false
+  })
+ }
+
 
 
 
@@ -132,6 +138,7 @@ class App extends React.Component {
           businessOwner={this.state.businessOwner}
           business={this.state.business}
           renderNewBusiness={this.renderNewBusiness}
+          notBusinessOwner={this.notBusinessOwner}
           />
         }
       </div>
