@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Segment, Card, Button, Image } from 'semantic-ui-react'
+import { Grid, Segment, Card, Button, Image, Icon } from 'semantic-ui-react'
 
 class BusinessProfile extends React.Component {
 	constructor(props) {
@@ -13,6 +13,10 @@ class BusinessProfile extends React.Component {
 	}
 
 	componentDidMount() {
+		this.props.getUserBusinessPosts(this.props.business.id)
+	}
+
+	componentDidUpdate() {
 		this.props.getUserBusinessPosts(this.props.business.id)
 	}
 
@@ -54,11 +58,25 @@ class BusinessProfile extends React.Component {
 					{this.props.posts.map(post => {
 						return(
 							<Card key={post.id}>
-								{post.business.name}
-								<Image src={post.image}/>
+								<Image 
+								style={{position: 'relative'}}
+								src={post.image}
+								/>
+								<Icon style={{position: 'absolute', top: '5px', right: '5px'}} name='ellipsis vertical'/>
+								<Card.Content>
+								<Card.Header>
+									<h1>
+										{post.business.name}
+									</h1>
+								</Card.Header>
 								{post.content}
 								<br />
 								{post.date}
+								</Card.Content>
+								<Button.Group>
+									<Button onClick={() => this.props.deletePost(post.id)}>Edit</Button>
+									<Button onClick={() => this.props.deletePost(post.id)}>Delete</Button>
+								</Button.Group>
 							</Card>
 					)})}
 				</Segment>

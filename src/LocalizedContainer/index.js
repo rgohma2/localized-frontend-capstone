@@ -98,6 +98,16 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	deletePost = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + id
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'DELETE',
+	    })
+	    const postJSON = await response.json()
+	    console.log(postJSON);
+	}
+
 	// stores id of business clicked on in state to be used to fetch data about business 
 	getBusinessId = (id) => {
 		this.setState({
@@ -139,7 +149,6 @@ class LocalizedContainer extends React.Component {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.state.busIdToShow
 		const response = await fetch(url)
 		const postsJSON = await response.json()
-		console.log(postsJSON);
 		if (postsJSON.status === 200){
 			this.setState({
 				businessToShowPosts: postsJSON.data
@@ -151,7 +160,6 @@ class LocalizedContainer extends React.Component {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + id
 		const response = await fetch(url)
 		const postsJSON = await response.json()
-		console.log(postsJSON);
 		if (postsJSON.status === 200){
 			this.setState({
 				userBusinessPosts: postsJSON.data
@@ -271,6 +279,8 @@ class LocalizedContainer extends React.Component {
 									business={this.props.business}
 									getUserBusinessPosts={this.getUserBusinessPosts}
 									posts={this.state.userBusinessPosts}
+									deletePost={this.deletePost}
+									// editPost={this.editPost}
 									/>
 									{
 										this.state.newModalOpen === true

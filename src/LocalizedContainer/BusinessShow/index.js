@@ -19,7 +19,7 @@ class BusinessShow extends React.Component {
 	render() {
 		return(
 			<div>
-				<Card
+				<Segment
 				style={{
 					display:'flex',
 					alignItems: 'flex-end',
@@ -81,7 +81,7 @@ class BusinessShow extends React.Component {
 						</Button.Content> 
 					}
 					</Button>
-				</Card>
+				</Segment>
 				<h1>About</h1>
 				<div>{this.props.businessToShow.about}</div>
 				<Segment>
