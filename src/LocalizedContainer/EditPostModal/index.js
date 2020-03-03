@@ -18,6 +18,13 @@ class EditPostModal extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		this.setState({
+			content: this.props.post.content,
+			image: this.props.post.image
+		})
+	}
+
 	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -38,8 +45,11 @@ class EditPostModal extends React.Component {
 		this.submit()
 	}
 
-	submit = () => {
-		this.props.addPost(this.state)
+	submit = (e) => {
+		if (this.state.formData === null) {
+			e.preventDefault()
+		} 
+		this.props.updatePost(this.state)
 	}
 
 	handleUploadChange = async (e) => {
@@ -62,7 +72,7 @@ class EditPostModal extends React.Component {
 			onClose={this.props.closeEditModal}>
 			<Modal.Header>Edit Post</Modal.Header>
 			<Modal.Content>
-				<Form onSubmit={this.handleSubmit}>
+				<Form onSubmit={this.state.formData === null ? this.submit : this.handleSubmit}>
 					<Form.Input
 					type='file'
 					label='Photo'

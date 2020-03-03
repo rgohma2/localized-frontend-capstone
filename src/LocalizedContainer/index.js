@@ -103,6 +103,7 @@ class LocalizedContainer extends React.Component {
 		const postJSON = await response.json()
 		if (postJSON.status === 200) {
 			this.getSubscriptions()
+			this.toggleNewModal()
 		}
 	}
 
@@ -133,6 +134,17 @@ class LocalizedContainer extends React.Component {
 	          'Content-Type': 'application/json'
 	        }
 		})
+		const postJSON = await response.json()
+
+		if (postJSON.status === 201) {
+			const posts = this.state.userBusinessPosts
+			const index = posts.findIndex(post => post.id === this.state.idOfPostToEdit)
+			posts[index] = postJSON.data 
+			this.setState({
+				userBusinessPosts: posts
+			})
+			this.closeEditModal()
+		}
 	}
 
 	// stores id of business clicked on in state to be used to fetch data about business 
@@ -325,6 +337,7 @@ class LocalizedContainer extends React.Component {
 										<EditPostModal
 										closeEditModal={this.closeEditModal}
 										post={this.state.userBusinessPosts.find(post => post.id === this.state.idOfPostToEdit)}
+										updatePost={this.updatePost}
 										/>	
 										:
 										null
