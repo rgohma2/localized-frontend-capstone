@@ -117,8 +117,21 @@ class LocalizedContainer extends React.Component {
 	}
 
 	editPost = (id) => {
+		console.log(id);
 		this.setState({
 			idOfPostToEdit: id
+		})
+	}
+
+	updatePost = async (postInfo) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.state.idOfPostToEdit
+		const response = await fetch(url, {
+			credentials: 'include',
+	        method: 'PUT',
+	        body: JSON.stringify(postInfo),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
 		})
 	}
 
@@ -311,6 +324,7 @@ class LocalizedContainer extends React.Component {
 										?
 										<EditPostModal
 										closeEditModal={this.closeEditModal}
+										post={this.state.userBusinessPosts.find(post => post.id === this.state.idOfPostToEdit)}
 										/>	
 										:
 										null

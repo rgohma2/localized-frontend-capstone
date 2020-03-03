@@ -7,9 +7,9 @@ import axios from 'axios'
 
 
 class EditPostModal extends React.Component {
-	constructor() {
+	constructor(props) {
 
-		super()
+		super(props)
 
 		this.state = {
 			image: '',
@@ -54,6 +54,7 @@ class EditPostModal extends React.Component {
 
 
 	render() {
+		
 		return(
 			<Modal 
 			open={true} 
