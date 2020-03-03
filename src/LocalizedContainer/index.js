@@ -202,8 +202,18 @@ class LocalizedContainer extends React.Component {
 	          'Content-Type': 'application/json'
 	        }
 	    })
-	        const busJSON = await response.json()
-	        console.log(busJSON)
+        const busJSON = await response.json()
+        console.log(busJSON)
+        if (busJSON.status === 200) {
+        	const businesses = this.state.businesses
+        	const index = businesses.findIndex(bus => bus.id === this.props.business.id)
+        	businesses[index] = busJSON.data
+        	this.setState({
+        		businesses: businesses
+        	})
+        	this.props.updateUserBusiness(busJSON.data)
+        	this.toggleEditBusiness()
+        }
 	}
 
 

@@ -108,6 +108,12 @@ class App extends React.Component {
   })
  }
 
+ updateUserBusiness = (business) => {
+  this.setState({
+    business: business
+  })
+ }
+
 
 
 
@@ -139,6 +145,7 @@ class App extends React.Component {
           business={this.state.business}
           renderNewBusiness={this.renderNewBusiness}
           notBusinessOwner={this.notBusinessOwner}
+          updateUserBusiness={this.updateUserBusiness}
           />
         }
       </div>

@@ -175,7 +175,7 @@ class BusinessEditModal extends React.Component {
 							width:'100%',
 							marginTop: '10px'
 						}}
-						>Create Business</Button>
+						>Update Business</Button>
 						</Form.Field>
 						</Form>
 					</Grid.Row>
