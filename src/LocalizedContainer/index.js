@@ -9,7 +9,7 @@ import BusinessShow from './BusinessShow'
 import BusinessEditModal from './BusinessEditModal'
 
 
-import { Segment } from 'semantic-ui-react'
+import { Segment, Dimmer, Loader } from 'semantic-ui-react'
 
 import {
   BrowserRouter as Router,
@@ -37,11 +37,14 @@ class LocalizedContainer extends React.Component {
 			businessToShowPosts: [],
 			buttonState: null,
 			idOfPostToEdit: -1,
-			editBusiness: false
+			editBusiness: false,
+			lat: 0,
+			lng: 0
 		}
 	}
 
 	componentDidMount() {
+		this.getLocation()
 		this.getBusinesses()
 		this.getSubscriptions()
 	}
@@ -302,8 +305,17 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
-
-
+	getLocation = async () => {
+		const address = this.props.userAddress
+		console.log(address);
+		const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/'${address.address_1} ${address.city} ${address.state} ${address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`
+		const response = await fetch(url)
+		const location = await response.json()
+		this.setState({
+			lng: location.features[0].center[1],
+			lat: location.features[0].center[0]
+		})
+	}
 
 
 	render() {
@@ -335,10 +347,19 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/local'>
 								<h1>Local Businesses</h1>
-								<LocalBusinessesList
-								businesses={this.state.businesses}
-								getBusinessId={this.getBusinessId}
-								/>
+								{
+									this.state.lat === 0
+									?
+								    null
+									:
+									<LocalBusinessesList
+									businesses={this.state.businesses}
+									getBusinessId={this.getBusinessId}
+									lat={this.state.lat}
+									lng={this.state.lng}
+									/>
+								}
+								
 							</Route>
 						</Switch>
 						<Switch>

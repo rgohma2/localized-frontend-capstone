@@ -14,8 +14,11 @@ class App extends React.Component {
       message: '',
       showMessage: false,
       loggedIn: false,
+      userAddress: '',
       businessOwner: false,
-      business: ''
+      business: '',
+      lat: 0,
+      lng: 0
     }
   }
 
@@ -52,13 +55,13 @@ class App extends React.Component {
         }
     })
     const loginJSON = await response.json()
-    console.log(loginJSON);
+    this.setState({userAddress: loginJSON.data.address})
 
     // renders 'your business profile' in nav if user logged in owns a business
     // stores business info of user to render profile
     this.setState({
       message: loginJSON.message,
-      showMessage: true,
+      showMessage: true
     })
 
     if (loginJSON.status === 201) {
@@ -120,7 +123,6 @@ class App extends React.Component {
 
 
 
-
   render(){
     return (
       <div>
@@ -146,6 +148,7 @@ class App extends React.Component {
           renderNewBusiness={this.renderNewBusiness}
           notBusinessOwner={this.notBusinessOwner}
           updateUserBusiness={this.updateUserBusiness}
+          userAddress={this.state.userAddress}
           />
         }
       </div>
