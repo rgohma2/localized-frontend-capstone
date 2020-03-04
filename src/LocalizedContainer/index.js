@@ -339,6 +339,8 @@ class LocalizedContainer extends React.Component {
 
 
 	render() {
+		console.log(this.state.lat === 0 || this.state.businessLocations === [])
+		console.log(this.props.businessLocations);
 		return(
 			<div>
 				<Router>
@@ -369,17 +371,19 @@ class LocalizedContainer extends React.Component {
 								<h1>Local Businesses</h1>
 
 								{
-									this.state.lat === 0
-									?
-								    null
-									:
-									<LocalBusinessesList
-									businesses={this.state.businesses}
-									getBusinessId={this.getBusinessId}
-									lat={this.state.lat}
-									lng={this.state.lng}
-									getBusinessLocations={this.getBusinessLocations}
-									/>
+					
+										(this.state.lat === 0 || this.state.businessLocations === [])
+										?
+									    null
+										:
+										<LocalBusinessesList
+										businesses={this.state.businesses}
+										getBusinessId={this.getBusinessId}
+										lat={this.state.lat}
+										lng={this.state.lng}
+										businessLocations={this.state.businessLocations}
+										/>
+				
 								}
 								
 							</Route>
