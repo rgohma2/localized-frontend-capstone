@@ -39,7 +39,8 @@ class LocalizedContainer extends React.Component {
 			idOfPostToEdit: -1,
 			editBusiness: false,
 			lat: 0,
-			lng: 0
+			lng: 0,
+			businessLocations: []
 		}
 	}
 
@@ -57,6 +58,11 @@ class LocalizedContainer extends React.Component {
 		const businessesJson = await response.json()
 		console.log(businessesJson);
 		this.setState({businesses: businessesJson.data})
+
+		businessesJson.data.forEach(bus => {
+			this.getBusinessLocations(bus)
+		})
+
 	}
 
 	// creates a business
@@ -317,6 +323,20 @@ class LocalizedContainer extends React.Component {
 		})
 	}
 
+	getBusinessLocations = async (bus) => {
+		if (bus.address.address_1 !== "") {
+			console.log(bus.address.address_1);
+			const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${bus.address.city} ${bus.address.state} ${bus.address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`)
+			const location = await response.json()
+			this.setState({
+				businessLocations:[...this.state.businessLocations, {
+					lng: location.features[0].center[1],
+					lat: location.features[0].center[0]
+				}]
+			})
+		}
+	}
+
 
 	render() {
 		return(
@@ -347,6 +367,7 @@ class LocalizedContainer extends React.Component {
 						<Switch>
 							<Route path='/local'>
 								<h1>Local Businesses</h1>
+
 								{
 									this.state.lat === 0
 									?
@@ -357,6 +378,7 @@ class LocalizedContainer extends React.Component {
 									getBusinessId={this.getBusinessId}
 									lat={this.state.lat}
 									lng={this.state.lng}
+									getBusinessLocations={this.getBusinessLocations}
 									/>
 								}
 								

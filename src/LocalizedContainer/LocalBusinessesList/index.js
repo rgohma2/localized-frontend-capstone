@@ -15,8 +15,6 @@ class LocalBusinessesList extends React.Component {
 		super(props)
 
 		this.state = {
-			lng: 0,
-			lat: 0,
 			zoom: 10
 		}
 	}
@@ -38,6 +36,16 @@ class LocalBusinessesList extends React.Component {
 
 
 	render() {
+		console.log(this.props.businesses);
+			// getBusinessLocations = async () => {
+				
+			// 	this.state.businesses.forEach(bus => {
+			// 		console.log(bus);
+			// 		// if (bus.address.address_1 !== '') {
+			// 		// 	const response = `https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${address.city} ${address.state} ${address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`
+			// 		// }
+			// 	})
+			// }
 		return(
 			<div>
 				<div>
