@@ -42,6 +42,7 @@ class LocalBusinessesList extends React.Component {
 	}
 
 
+
 	render() {
 
 		console.log(this.props.businessLocations);
