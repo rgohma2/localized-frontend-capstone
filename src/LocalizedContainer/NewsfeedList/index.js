@@ -22,13 +22,14 @@ class NewsfeedList extends React.Component {
 			posts = posts.filter(post => post.business.category === this.props.category)
 		} 
 		return(
-			<Segment>
+			<div>
+			<Card.Group style={{height: '600px', overflow:'scroll'}} itemsPerRow={1}>
 				{
 					posts.length > 0
 					?
 					posts.map((post) => {
 						return(
-							<Card key={post.id}>
+							<Card key={post.id} >
 								<Image src={post.image}/>
 								<Card.Content>
 								<Card.Header>
@@ -47,9 +48,11 @@ class NewsfeedList extends React.Component {
 							</Card>
 					)})
 					:
-					"Subscribe to businesses to view their latest posts here!"
+					<h1>"Subscribe to businesses to view their latest posts here!"</h1>
 				}
-			</Segment>
+				</Card.Group>
+			</div>
+
 		)
 	}
 }

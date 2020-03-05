@@ -73,8 +73,8 @@ class LocalBusinessesList extends React.Component {
 		console.log(this.props.businessLocations);
 		return(
 			<div>
-				<div>
-					<div style={{width:'50vw', height: '50vh'}} ref={el => this.mapContainer = el} />
+				<div style={{textAlign: 'center'}}>
+					<div style={{width:'80vw', height: '50vh'}} ref={el => this.mapContainer = el} />
 				</div>
 			 {this.props.businesses.map(b => {
 				return(

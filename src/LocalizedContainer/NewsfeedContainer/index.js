@@ -34,6 +34,11 @@ class NewsfeedContainer extends React.Component {
 	        }
 		})
 		const commentJSON = await response.json()
+		const comments = this.state.comments 
+		comments.push(commentJSON.data)
+		this.setState({
+			comments: comments
+		})
 	}
 
 	getComments = async () => {
@@ -63,9 +68,9 @@ class NewsfeedContainer extends React.Component {
 	render(){
 		const { activeItem } = this.state
 		return(
-			<Grid centered columns={3} divided>
-				<Grid.Column>
-					<Menu vertical fluid>
+			<Grid centered columns={this.state.postId === -1 ? 2 : 3} >
+				<Grid.Column width={4}>
+					<Menu vertical>
 
 						<Menu.Item 
 						name='all'
@@ -98,7 +103,18 @@ class NewsfeedContainer extends React.Component {
 		              	onClick={this.handleItemClick}
 						/>
 					</Menu>
-					<Segment>
+				
+				</Grid.Column>
+				<Grid.Column width={8}>
+					<NewsfeedList
+					category={this.state.activeItem}
+					posts={this.props.posts}
+					getPostId={this.getPostId}
+					getPost={this.getPost}
+					/>
+				</Grid.Column>
+				<Grid.Column width={4}>
+				<Segment style={{width: '210px'}}>
 						<h3>Subscriptions</h3>
 						{this.props.subscriptions.map(sub => {
 							return(
@@ -107,17 +123,7 @@ class NewsfeedContainer extends React.Component {
 								</div>
 							)
 						})}
-					</Segment>
-				</Grid.Column>
-				<Grid.Column>
-					<NewsfeedList
-					category={this.state.activeItem}
-					posts={this.props.posts}
-					getPostId={this.getPostId}
-					getPost={this.getPost}
-					/>
-				</Grid.Column>
-				<Grid.Column>
+				</Segment>
 				{
 					this.state.postId !== -1
 					?

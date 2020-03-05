@@ -7,6 +7,7 @@ import EditPostModal from './EditPostModal'
 import LocalBusinessesList from './LocalBusinessesList'
 import BusinessShow from './BusinessShow'
 import BusinessEditModal from './BusinessEditModal'
+import ChangeBannerModal from './ChangeBannerModal'
 
 
 import { Segment, Dimmer, Loader } from 'semantic-ui-react'
@@ -40,7 +41,10 @@ class LocalizedContainer extends React.Component {
 			editBusiness: false,
 			lat: 0,
 			lng: 0,
-			businessLocations: []
+			businessLocations: [],
+			activeItem: '',
+			showBannerModal: false,
+			banner: this.props.business.image
 		}
 	}
 
@@ -48,6 +52,55 @@ class LocalizedContainer extends React.Component {
 		this.getLocation()
 		this.getBusinesses()
 		this.getSubscriptions()
+	}
+
+	toggleChangeBanner = () => {
+		this.setState({
+			showBannerModal: this.state.showBannerModal === false ? true : false
+		})
+	}
+
+	changeBanner = async (imgurl) => {
+		const business = this.props.business
+		const newBusiness = {
+			name: business.name,
+			about: business.about,
+			category: business.category,
+			image: imgurl,
+			address_1: business.address.address_1,
+			address_2: business.address.address_2,
+			city: business.address.city,
+			state: business.address.state,
+			zip_code: business.address.zip_code,
+			country: business.address.country 
+		}
+
+		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/' + this.props.business.id
+		const response = await fetch(url, {
+			credentials: 'include',
+			method: 'PUT',
+			body: JSON.stringify(newBusiness),
+	        headers: {
+	          'Content-Type': 'application/json'
+	        }
+	    })
+        const busJSON = await response.json()
+        console.log(busJSON)
+        console.log('hellllllo');	
+        if (busJSON.status === 200) {
+        	const businesses = this.state.businesses
+        	const index = businesses.findIndex(bus => bus.id === this.props.business.id)
+        	businesses[index] = busJSON.data
+        	this.setState({
+        		businesses: businesses
+        	})
+        	this.props.updateUserBusiness(busJSON.data)
+        	console.log(busJSON.data);
+			this.setState({
+				banner: busJSON.data.image
+			})
+        }
+		this.toggleChangeBanner()
 	}
 
 
@@ -214,6 +267,7 @@ class LocalizedContainer extends React.Component {
 	    })
         const busJSON = await response.json()
         console.log(busJSON)
+        console.log('hellllllo');	
         if (busJSON.status === 200) {
         	const businesses = this.state.businesses
         	const index = businesses.findIndex(bus => bus.id === this.props.business.id)
@@ -340,6 +394,12 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	handleNavClick = (item) => {
+		this.setState({
+			activeItem: item
+		})
+	}
+
 
 	render() {
 		return(
@@ -355,21 +415,58 @@ class LocalizedContainer extends React.Component {
 						</div>
 						<Segment
 						style={{
-							alignSelf: 'center',
+							alignItems: 'center',
 							display: 'flex',
 							justifyContent: 'space-around',
-							backgroundColor: '#2d85e3',
+							backgroundColor: 'white',
 							padding: '10px',
 						}}
 						>
-							<Link className='nav' to='/newsfeed'>Newsfeed</Link>
-							<Link className='nav' to='/local'>Local Businesses</Link>
+							<Link 
+							onClick={() => {this.handleNavClick('newsfeed')}}
+							className={
+								this.state.activeItem === 'newsfeed'
+								?
+								'nav active-item'
+								:
+								'nav'
+							}
+							to='/newsfeed'>Newsfeed</Link>
+
+							<Link 
+							onClick={() => {this.handleNavClick('local')}}
+							className={
+								this.state.activeItem === 'local'
+								?
+								'nav active-item'
+								:
+								'nav'
+							} 
+							to='/local'>Local Businesses</Link>
 							{	
 								this.props.businessOwner === false
 								?
-								<Link className='nav' to='/new'>Add Your Business</Link>
+								<Link 
+								onClick={() => {this.handleNavClick('new')}}
+								className={
+									this.state.activeItem === 'new'
+									?
+									'nav active-item'
+									:
+									'nav'
+								} 
+								to='/new'>Add Your Business</Link>
 								:
-								<Link className='nav' to='/profile'>Your Business Profile</Link>
+								<Link 
+								onClick={() => {this.handleNavClick('profile')}}
+								className={
+									this.state.activeItem === 'profile'
+									?
+									'nav active-item'
+									:
+									'nav'
+								}
+								to='/profile'>Your Business Profile</Link>
 							}
 							<Link className='nav' to='/' onClick={() => this.props.logout(true)}>Logout</Link>
 						</Segment>
@@ -377,8 +474,6 @@ class LocalizedContainer extends React.Component {
 					<Segment>
 						<Switch>
 							<Route path='/local'>
-								<h1>Local Businesses</h1>
-
 								{
 					
 										this.state.lat === 0
@@ -400,7 +495,6 @@ class LocalizedContainer extends React.Component {
 						</Switch>
 						<Switch>
 							<Route path='/new'>
-								<h1>Add Your Business</h1>
 								<NewBusinessForm
 								addBusiness={this.addBusiness}
 								/>
@@ -408,7 +502,6 @@ class LocalizedContainer extends React.Component {
 						</Switch>
 						<Switch>
 							<Route path='/newsfeed'>
-								<h1>Newsfeed</h1>
 								<NewsfeedContainer
 								getBusinessId={this.getBusinessId}
 								subscriptions={this.state.subscriptions}
@@ -417,7 +510,6 @@ class LocalizedContainer extends React.Component {
 							</Route>
 							<Switch>
 								<Route path='/profile'>
-									<h1>Business Profile</h1>
 									<BusinessProfile
 									toggleNewModal={this.toggleNewModal}
 									business={this.props.business}
@@ -427,6 +519,8 @@ class LocalizedContainer extends React.Component {
 									deletePost={this.deletePost}
 									editPost={this.editPost}
 									toggleEditBusiness={this.toggleEditBusiness}
+									toggleChangeBanner={this.toggleChangeBanner}
+									banner={this.state.banner}
 									/>
 									{
 										this.state.newModalOpen === true
@@ -457,6 +551,16 @@ class LocalizedContainer extends React.Component {
 										updateBusiness={this.updateBusiness}
 										business={this.props.business}
 										/>	
+										:
+										null
+									}
+									{
+										this.state.showBannerModal === true
+										?
+										<ChangeBannerModal 
+										toggleChangeBanner={this.toggleChangeBanner}
+										changeBanner={this.changeBanner}
+										/>
 										:
 										null
 									}

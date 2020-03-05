@@ -151,8 +151,6 @@ class App extends React.Component {
           userAddress={this.state.userAddress}
           />
         }
-      <div style={{height: '40px', backgroundColor: '#85cec7'}}>
-      </div>
       </div>
     )
   }

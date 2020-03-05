@@ -3,7 +3,14 @@
 }
 
 .nav {
-	color: white;
+	color: black;
+}
+
+.active-item {
+	/*background-color: #85cec7;*/
+	background-color: #D3D3D3;
+	padding: 5px 25px 5px 25px;
+	border-radius: 50px;
 }
 
 .marker {
