@@ -6,6 +6,11 @@
 	color: black;
 }
 
+.fake-link:hover {
+  color: #4b89c7;
+  cursor: pointer;
+}
+
 .active-item {
 	/*background-color: #85cec7;*/
 	background-color: #D3D3D3;

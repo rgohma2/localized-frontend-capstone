@@ -66,7 +66,7 @@ class LoginRegister extends React.Component {
 			className="center aligned"
 			style={{
 				backgroundImage: `url(https://www.reachabovemedia.com/wp-content/uploads/2019/03/optimisation-google-my-business.jpg})`,
-				height: '750px'
+				height: '800px'
 			}}
 			>
 			<Router>

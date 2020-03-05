@@ -50,7 +50,7 @@ class LocalBusinessesList extends React.Component {
 			const marker = new mapboxgl.Marker()
 			.setLngLat([bus.lat, bus.lng])
 			.setPopup(new mapboxgl.Popup({ offset: 25 })
-			.setHTML('<h3>' + bus.name + '</h3><p>' + bus.category + '</p>'))
+			.setHTML('<h3>' + bus.name + '</h3><p>' + bus.category + ' vendor'+ '</p>'))
 			
 			const markerDiv = marker.getElement()
 			console.log(markerDiv);
@@ -64,6 +64,8 @@ class LocalBusinessesList extends React.Component {
 		})
 
 		const marker = new mapboxgl.Marker().setLngLat([-87.819082, 41.913435]).addTo(map);
+		const markerDiv = marker.getElement()
+		console.log(markerDiv);
 	}
 
 
@@ -73,7 +75,7 @@ class LocalBusinessesList extends React.Component {
 		console.log(this.props.businessLocations);
 		return(
 			<div>
-				<div style={{textAlign: 'center'}}>
+				<div style={{display: 'flex', justifyContent: 'center'}}>
 					<div style={{width:'80vw', height: '50vh'}} ref={el => this.mapContainer = el} />
 				</div>
 			 {this.props.businesses.map(b => {

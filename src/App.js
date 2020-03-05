@@ -55,7 +55,10 @@ class App extends React.Component {
         }
     })
     const loginJSON = await response.json()
-    this.setState({userAddress: loginJSON.data.address})
+    this.setState({
+      userAddress: loginJSON.data.address,
+      
+    })
 
     // renders 'your business profile' in nav if user logged in owns a business
     // stores business info of user to render profile
@@ -91,7 +94,8 @@ class App extends React.Component {
     if (bool === true){
       this.setState({
         loggedIn: false,
-        businessOwner:false
+        businessOwner: false,
+        showMessage: false
       })
     }
   }

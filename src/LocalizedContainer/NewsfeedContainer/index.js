@@ -78,23 +78,23 @@ class NewsfeedContainer extends React.Component {
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
-						name='agriculture'
+						name='agricultural'
 						active={activeItem === 'agriculture'}
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
-						name='clothing'
-						active={activeItem === 'clothing'}
+						name='art'
+						active={activeItem === 'art'}
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
-						name='drink'
-						active={activeItem === 'drink'}
+						name='apparel'
+						active={activeItem === 'apparel'}
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
 						name='food'
-						active={activeItem === 'food'}
+						active={activeItem === 'foodstuffs'}
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
@@ -111,6 +111,7 @@ class NewsfeedContainer extends React.Component {
 					posts={this.props.posts}
 					getPostId={this.getPostId}
 					getPost={this.getPost}
+					getBusinessId={this.props.getBusinessId}
 					/>
 				</Grid.Column>
 				<Grid.Column width={4}>

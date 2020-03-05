@@ -180,6 +180,7 @@ class LocalizedContainer extends React.Component {
 	    })
 	    const postJSON = await response.json()
 	    console.log(postJSON);
+	    this.getSubscriptions()
 	}
 
 	editPost = (id) => {
@@ -209,6 +210,7 @@ class LocalizedContainer extends React.Component {
 				userBusinessPosts: posts
 			})
 			this.closeEditModal()
+			this.getSubscriptions()
 		}
 	}
 
@@ -407,7 +409,7 @@ class LocalizedContainer extends React.Component {
 				<Router>
 					<nav>
 						<div style={{textAlign: 'center'}}>
-							<Link to='/'><h1 style={{
+							<Link to='/newsfeed'><h1 style={{
 								backgroundColor: '#85cec7',
 								marginBottom: '20px',
 								color:'black'
@@ -604,6 +606,7 @@ class LocalizedContainer extends React.Component {
 						:
 						null
 					}
+					<Redirect to={'/newsfeed'}/>
 					</Segment>
 				</Router>
 			</div>

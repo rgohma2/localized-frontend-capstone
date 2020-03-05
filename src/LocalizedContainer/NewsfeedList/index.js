@@ -23,7 +23,7 @@ class NewsfeedList extends React.Component {
 		} 
 		return(
 			<div>
-			<Card.Group style={{height: '600px', overflow:'scroll'}} itemsPerRow={1}>
+			<Card.Group style={{height: '900px', overflow:'scroll'}} itemsPerRow={1}>
 				{
 					posts.length > 0
 					?
@@ -33,7 +33,7 @@ class NewsfeedList extends React.Component {
 								<Image src={post.image}/>
 								<Card.Content>
 								<Card.Header>
-									<h1>
+									<h1 className='fake-link' onClick={() => this.props.getBusinessId(post.business.id)}>
 										{post.business.name}
 									</h1>
 								</Card.Header>
@@ -41,7 +41,7 @@ class NewsfeedList extends React.Component {
 								<br />
 								{post.date}
 								</Card.Content>
-								<div as='a' onClick={() => {
+								<div style={{textAlign: 'center'}}className='fake-link' onClick={() => {
 									this.props.getPostId(post.id)
 									this.props.getPost(post)
 								}}>View Comments</div>

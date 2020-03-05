@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Segment, Button, Form, TextArea, Card, Icon } from 'semantic-ui-react'
+import { Segment, Button, Form, TextArea, Card, Icon, Image } from 'semantic-ui-react'
 
 class CommentsContainer extends React.Component {
 	constructor() {
@@ -38,7 +38,7 @@ class CommentsContainer extends React.Component {
 
 	render() {
 		return(
-			<Segment>
+			<Segment style={{overflow: 'scroll', height: '700px'}}>
 				<div
 				style={{
 					display: 'flex',
@@ -47,13 +47,15 @@ class CommentsContainer extends React.Component {
 				>
 					<Icon style={{cursor: 'pointer'}} onClick={() => this.props.getPostId(-1)}name='close'/>
 				</div>
+				<Image src={this.props.post.image}></Image>
 				<h2>{this.props.post.content}</h2>
 				{this.props.comments.map(comment => {
 					return (
-						<Card key={comment.id}>
+						<Card style={{padding: '5px'}} key={comment.id}>
+							<strong>{comment.commenter.first_name}</strong>
 							{comment.content}
 							<br />
-							{comment.date}
+							<small>{comment.date}</small>
 						</Card>
 				)})}
 				<Form onSubmit={this.handleSubmit}>
