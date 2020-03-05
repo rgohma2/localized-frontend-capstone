@@ -29,7 +29,7 @@ class LocalBusinessesList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.lat);
+
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,
 			style: 'mapbox://styles/mapbox/streets-v11',
@@ -37,7 +37,32 @@ class LocalBusinessesList extends React.Component {
 			center: [this.props.lat, this.props.lng],
 			zoom: this.state.zoom
 		})
+
 		console.log(this.props.businessLocations);
+		console.log('hi'); 
+
+		const popup = new mapboxgl.Popup({
+			closeButton: false,
+			closeOnClick: false
+		})
+
+		this.props.businessLocations.forEach(bus => {
+			const marker = new mapboxgl.Marker()
+			.setLngLat([bus.lat, bus.lng])
+			.setPopup(new mapboxgl.Popup({ offset: 25 })
+			.setHTML(`<h3 dataset-marker="${bus.id}">` + bus.name + '</h3><p>' + bus.category + '</p>'))
+			
+			const markerDiv = marker.getElement()
+			console.log(markerDiv);
+
+			markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+			markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+			markerDiv.addEventListener('click', () => this.props.getBusinessId(bus.id))
+
+
+			marker.addTo(map)
+		})
+
 		const marker = new mapboxgl.Marker().setLngLat([-87.819082, 41.913435]).addTo(map);
 	}
 

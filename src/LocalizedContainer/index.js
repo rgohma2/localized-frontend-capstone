@@ -56,8 +56,9 @@ class LocalizedContainer extends React.Component {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
 		const response = await fetch(url)
 		const businessesJson = await response.json()
-		console.log(businessesJson);
-		this.setState({businesses: businessesJson.data})
+		this.setState({
+			businesses: businessesJson.data,
+		})
 
 		businessesJson.data.forEach(bus => {
 			this.getBusinessLocations(bus)
@@ -67,7 +68,6 @@ class LocalizedContainer extends React.Component {
 
 	// creates a business
 	addBusiness = async (businessInfo) => {
-		console.log('hi');
 		const url = process.env.REACT_APP_API_URL + '/api/v1/businesses/'
 		const response = await fetch(url, {
 			credentials: 'include',
@@ -179,6 +179,7 @@ class LocalizedContainer extends React.Component {
 				businessToShow: busJSON.data
 			})
 		}
+		this.setState({busIdToShow: -1})
 	}
 
 	deleteBusiness = async (id) => {
@@ -325,11 +326,13 @@ class LocalizedContainer extends React.Component {
 
 	getBusinessLocations = async (bus) => {
 		if (bus.address.address_1 !== "") {
-			console.log(bus.address.address_1);
 			const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${bus.address.city} ${bus.address.state} ${bus.address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`)
 			const location = await response.json()
 			this.setState({
 				businessLocations:[...this.state.businessLocations, {
+					id: bus.id,
+					category: bus.category,
+					name: bus.name,
 					lng: location.features[0].center[1],
 					lat: location.features[0].center[0]
 				}]
@@ -339,8 +342,6 @@ class LocalizedContainer extends React.Component {
 
 
 	render() {
-		console.log(this.state.lat === 0 || this.state.businessLocations === [])
-		console.log(this.props.businessLocations);
 		return(
 			<div>
 				<Router>
@@ -372,7 +373,7 @@ class LocalizedContainer extends React.Component {
 
 								{
 					
-										(this.state.lat === 0 || this.state.businessLocations === [])
+										this.state.lat === 0
 										?
 									    null
 										:
@@ -382,6 +383,7 @@ class LocalizedContainer extends React.Component {
 										lat={this.state.lat}
 										lng={this.state.lng}
 										businessLocations={this.state.businessLocations}
+										getBusinessId={this.getBusinessId}
 										/>
 				
 								}
@@ -465,6 +467,7 @@ class LocalizedContainer extends React.Component {
 									checkIfSubscribed={this.checkIfSubscribed}
 									removeSubscription={this.removeSubscription}
 									buttonState={this.state.buttonState}
+									getBusinessId={this.getBusinessId}
 									/>
 								</Route>
 						</Switch>
@@ -479,6 +482,13 @@ class LocalizedContainer extends React.Component {
 						this.props.businessOwner === false
 						?
 						<Redirect to='/new'/>
+						:
+						null
+					}
+					{
+						this.state.busIdToShow !== -1
+						?
+						<Redirect to={'/show/' + this.state.busIdToShow}/>
 						:
 						null
 					}
