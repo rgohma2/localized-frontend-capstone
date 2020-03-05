@@ -343,28 +343,36 @@ class LocalizedContainer extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div style={{backgroundColor:'#85cec7'}}>
 				<Router>
 					<nav>
-						<Link to='/'><h1 style={{color:'black'}}>Localized</h1></Link>
-						<div
+						<div style={{textAlign: 'center'}}>
+							<Link to='/'><h1 style={{
+								backgroundColor: '#85cec7',
+								marginBottom: '20px',
+								color:'black'
+							}}>Localized</h1></Link>
+						</div>
+						<Segment
 						style={{
 							alignSelf: 'center',
 							display: 'flex',
-							justifyContent: 'space-around'
+							justifyContent: 'space-around',
+							backgroundColor: '#2d85e3',
+							padding: '10px',
 						}}
 						>
-							<Link to='/newsfeed'>Newsfeed</Link>
-							<Link to='/local'>Local Businesses</Link>
+							<Link className='nav' to='/newsfeed'>Newsfeed</Link>
+							<Link className='nav' to='/local'>Local Businesses</Link>
 							{	
 								this.props.businessOwner === false
 								?
-								<Link to='/new'>Add Your Business</Link>
+								<Link className='nav' to='/new'>Add Your Business</Link>
 								:
-								<Link to='/profile'>Your Business Profile</Link>
+								<Link className='nav' to='/profile'>Your Business Profile</Link>
 							}
-							<Link to='/' onClick={() => this.props.logout(true)}>Logout</Link>
-						</div>
+							<Link className='nav' to='/' onClick={() => this.props.logout(true)}>Logout</Link>
+						</Segment>
 					</nav>
 					<Segment>
 						<Switch>

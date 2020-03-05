@@ -130,7 +130,7 @@ class App extends React.Component {
           this.state.loggedIn === false
           ?
           <div>
-            <h1>Localized</h1>
+            <h1 style={{backgroundColor: '#85cec7'}}>Localized</h1>
             <LoginRegister
             register={this.register}
             login={this.login}
@@ -151,6 +151,8 @@ class App extends React.Component {
           userAddress={this.state.userAddress}
           />
         }
+      <div style={{height: '40px', backgroundColor: '#85cec7'}}>
+      </div>
       </div>
     )
   }

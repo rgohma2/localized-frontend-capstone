@@ -29,11 +29,17 @@ class NewsfeedList extends React.Component {
 					posts.map((post) => {
 						return(
 							<Card key={post.id}>
-								{post.business.name}
 								<Image src={post.image}/>
+								<Card.Content>
+								<Card.Header>
+									<h1>
+										{post.business.name}
+									</h1>
+								</Card.Header>
 								{post.content}
 								<br />
 								{post.date}
+								</Card.Content>
 								<div as='a' onClick={() => {
 									this.props.getPostId(post.id)
 									this.props.getPost(post)

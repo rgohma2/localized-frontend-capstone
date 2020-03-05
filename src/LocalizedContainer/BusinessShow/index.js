@@ -88,11 +88,17 @@ class BusinessShow extends React.Component {
 					{this.props.posts.map(post => {
 						return(
 							<Card key={post.id}>
-								{post.business.name}
 								<Image src={post.image}/>
+								<Card.Content>
+								<Card.Header>
+									<h1>
+										{post.business.name}
+									</h1>
+								</Card.Header>
 								{post.content}
 								<br />
 								{post.date}
+								</Card.Content>
 							</Card>
 					)})}
 				</Segment>

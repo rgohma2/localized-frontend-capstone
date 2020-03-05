@@ -73,10 +73,8 @@ class BusinessProfile extends React.Component {
 						return(
 							<Card key={post.id}>
 								<Image 
-								style={{position: 'relative'}}
 								src={post.image}
 								/>
-								<Icon style={{position: 'absolute', top: '5px', right: '5px'}} name='ellipsis vertical'/>
 								<Card.Content>
 								<Card.Header>
 									<h1>

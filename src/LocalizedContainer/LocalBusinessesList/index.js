@@ -50,7 +50,7 @@ class LocalBusinessesList extends React.Component {
 			const marker = new mapboxgl.Marker()
 			.setLngLat([bus.lat, bus.lng])
 			.setPopup(new mapboxgl.Popup({ offset: 25 })
-			.setHTML(`<h3 dataset-marker="${bus.id}">` + bus.name + '</h3><p>' + bus.category + '</p>'))
+			.setHTML('<h3>' + bus.name + '</h3><p>' + bus.category + '</p>'))
 			
 			const markerDiv = marker.getElement()
 			console.log(markerDiv);
