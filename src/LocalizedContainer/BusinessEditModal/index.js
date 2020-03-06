@@ -51,11 +51,11 @@ class BusinessEditModal extends React.Component {
 	getOptions = () => {
 		return (
 		[
-			{key: 1, text: 'Agriculture', value: 'agriculture'},
-			{key: 2, text: 'Clothing', value: 'clothing'},
-			{key: 3, text: 'Drink', value: 'drink'},
-			{key: 4, text: 'Food', value: 'food'},
-			{key: 5, text: 'Technology', value: 'technology'},
+			{key: 1, text: 'Agricultural', value: 'agricultural'},
+			{key: 2, text: 'Art', value: 'art'},
+			{key: 3, text: 'Apparel', value: 'apparel'},
+			{key: 4, text: 'Foodstuffs', value: 'foodstuffs'},
+			{key: 5, text: 'Technology', value: 'technology'}
 		]
 	)}
 
