@@ -58,14 +58,9 @@ class LocalBusinessesList extends React.Component {
 			markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
 			markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
 			markerDiv.addEventListener('click', () => this.props.getBusinessId(bus.id))
-
-
 			marker.addTo(map)
 		})
 
-		const marker = new mapboxgl.Marker().setLngLat([-87.819082, 41.913435]).addTo(map);
-		const markerDiv = marker.getElement()
-		console.log(markerDiv);
 	}
 
 
