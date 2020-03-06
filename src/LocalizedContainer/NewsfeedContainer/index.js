@@ -93,7 +93,7 @@ class NewsfeedContainer extends React.Component {
 		              	onClick={this.handleItemClick}
 						/>
 						<Menu.Item 
-						name='food'
+						name='foodstuffs'
 						active={activeItem === 'foodstuffs'}
 		              	onClick={this.handleItemClick}
 						/>
