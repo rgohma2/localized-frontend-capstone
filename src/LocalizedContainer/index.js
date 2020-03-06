@@ -138,6 +138,7 @@ class LocalizedContainer extends React.Component {
 			this.setState({
 				addedBusiness: true
 			})
+			this.getBusinesses()
 		}
 	}
 
