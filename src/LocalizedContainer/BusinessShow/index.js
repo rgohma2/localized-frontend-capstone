@@ -45,7 +45,7 @@ class BusinessShow extends React.Component {
 						}}
 						>{this.props.businessToShow.name}</h1>
 					</Card>
-					<Button
+					<Button	
 					onClick={
 							this.props.subscribed === false
 							?

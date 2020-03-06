@@ -80,7 +80,7 @@ class LocalizedContainer extends React.Component {
 			credentials: 'include',
 			method: 'PUT',
 			body: JSON.stringify(newBusiness),
-	        headers: {
+	        headers: {	
 	          'Content-Type': 'application/json'
 	        }
 	    })
@@ -249,6 +249,7 @@ class LocalizedContainer extends React.Component {
 		console.log(busJSON);
 		if (busJSON.status === 200) {
 			this.props.notBusinessOwner()
+			this.props.getBusinesses()
 		}
 	}
 
