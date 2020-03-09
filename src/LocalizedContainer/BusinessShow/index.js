@@ -84,7 +84,7 @@ class BusinessShow extends React.Component {
 				</Segment>
 				<h1>About</h1>
 				<div>{this.props.businessToShow.about}</div>
-				<Segment>
+				<Segment>	
 					<Card.Group itemsPerRow={2}>
 					{this.props.posts.reverse().map(post => {
 						return(

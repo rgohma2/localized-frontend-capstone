@@ -18,7 +18,7 @@ class NewsfeedContainer extends React.Component {
 		}
 	}
 
-	componentDidUpdate(prev) {
+	componentDidUpdate() {
 		if (this.state.postId !== -1) {
 			this.getComments()
 		} 
