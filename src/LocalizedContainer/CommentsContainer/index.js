@@ -16,11 +16,11 @@ class CommentsContainer extends React.Component {
 		this.props.getComments()
 	}
 
-	componentDidUpdate(prev) {
-		if (this.props.comments !== prev.comments) {
-			this.props.getComments()
-		}
-	}
+	// componentDidUpdate(prev) {
+	// 	if (this.props.comments !== prev.comments) {
+	// 		this.props.getComments()
+	// 	}
+	// }
 
 	handleChange = (event) => {
 		this.setState({
@@ -52,7 +52,16 @@ class CommentsContainer extends React.Component {
 				{this.props.comments.map(comment => {
 					return (
 						<Card style={{padding: '5px'}} key={comment.id}>
-							<strong>{comment.commenter.first_name}</strong>
+							<div style={{display:'flex', justifyContent:'space-between'}}>
+								<strong>{comment.commenter.first_name}</strong>
+								{
+									this.props.userId === comment.commenter.id 
+									?
+									<Icon style={{cursor: 'pointer'}} onClick={() => this.props.deleteComment(comment.id)}name='close'/>
+									:
+									null
+								}
+							</div>
 							{comment.content}
 							<br />
 							<small>{comment.date}</small>

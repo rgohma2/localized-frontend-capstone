@@ -370,6 +370,7 @@ class LocalizedContainer extends React.Component {
 		}
 	}
 
+	// gets the lat and lng of the logged in user by making a request to the mapbox api
 	getLocation = async () => {
 		const address = this.props.userAddress
 		console.log(address);
@@ -382,6 +383,7 @@ class LocalizedContainer extends React.Component {
 		})
 	}
 
+	// takes a business as a parameter and makes a request to the mapbox api to get the lat and lng of that businesses address
 	getBusinessLocations = async (bus) => {
 		if (bus.address.address_1 !== "") {
 			const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${bus.address.city} ${bus.address.state} ${bus.address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`)
@@ -510,6 +512,7 @@ class LocalizedContainer extends React.Component {
 								getBusinessId={this.getBusinessId}
 								subscriptions={this.state.subscriptions}
 								posts={this.state.posts}
+								userId={this.props.userId}
 								/>	
 							</Route>
 							<Switch>

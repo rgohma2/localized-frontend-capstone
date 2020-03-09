@@ -15,6 +15,7 @@ class App extends React.Component {
       showMessage: false,
       loggedIn: false,
       userAddress: '',
+      userId: '',
       businessOwner: false,
       business: '',
       lat: 0,
@@ -57,7 +58,7 @@ class App extends React.Component {
     const loginJSON = await response.json()
     this.setState({
       userAddress: loginJSON.data.address,
-      
+      userId: loginJSON.data.id
     })
 
     // renders 'your business profile' in nav if user logged in owns a business
@@ -153,6 +154,7 @@ class App extends React.Component {
           notBusinessOwner={this.notBusinessOwner}
           updateUserBusiness={this.updateUserBusiness}
           userAddress={this.state.userAddress}
+          userId={this.state.userId}
           />
         }
       </div>

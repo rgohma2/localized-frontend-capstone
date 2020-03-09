@@ -18,10 +18,17 @@ class NewsfeedContainer extends React.Component {
 		}
 	}
 
+	componentDidUpdate(prev) {
+		if (this.state.postId !== -1) {
+			this.getComments()
+		} 
+	}
+
 	// changes active item in state to be the name of the menu item that was clicked 
 	handleItemClick = (e, { name }) => {
 		this.setState({ activeItem: name })
 	}
+
 
 	addComment = async (commentInfo) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + this.state.postId
@@ -34,11 +41,7 @@ class NewsfeedContainer extends React.Component {
 	        }
 		})
 		const commentJSON = await response.json()
-		const comments = this.state.comments 
-		comments.push(commentJSON.data)
-		this.setState({
-			comments: comments
-		})
+		this.getComments()
 	}
 
 	getComments = async () => {
@@ -53,16 +56,32 @@ class NewsfeedContainer extends React.Component {
 			})
 		}
 	}
+
+	deleteComment = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + id
+		const response = await fetch(url, {
+			credentials: 'include',
+			method: 'DELETE'
+		})
+		console.log(response);
+		const commentJSON = await response.json()
+		console.log(commentJSON);
+		if (commentJSON.status === 200) {
+			this.getComments()
+		}
+	}
+
 	getPost = (post) => {
 		this.setState({
 			post: post
 		})
+
 	}
 
 	getPostId = (id) => {
 		this.setState({
 			postId: id
-		})	
+		})
 	}
 
 	render(){
@@ -134,6 +153,8 @@ class NewsfeedContainer extends React.Component {
 						comments={this.state.comments}
 						getPostId={this.getPostId}
 						post={this.state.post}
+						userId={this.props.userId}
+						deleteComment={this.deleteComment}
 						/>
 					:
 					null
