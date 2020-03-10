@@ -112,11 +112,26 @@ class LocalizedContainer extends React.Component {
 		this.setState({
 			businesses: businessesJson.data,
 		})
-
 		businessesJson.data.forEach(bus => {
 			this.getBusinessLocations(bus)
 		})
+	}
 
+	// takes a business as a parameter and makes a request to the mapbox api to get the lat and lng of that businesses address
+	getBusinessLocations = async (bus) => {
+		if (bus.address.address_1 !== "") {
+			const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${bus.address.city} ${bus.address.state} ${bus.address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`)
+			const location = await response.json()
+			this.setState({
+				businessLocations:[...this.state.businessLocations, {
+					id: bus.id,
+					category: bus.category,
+					name: bus.name,
+					lng: location.features[0].center[1],
+					lat: location.features[0].center[0]
+				}]
+			})
+		}
 	}
 
 	// creates a business
@@ -248,8 +263,17 @@ class LocalizedContainer extends React.Component {
 		const busJSON = await response.json()
 		console.log(busJSON);
 		if (busJSON.status === 200) {
+
+			const businessLocations = this.state.businessLocations
+			const index = businessLocations.findIndex(bus => bus.id === id)
+			businessLocations.splice(index, 1)
+			this.setState({
+				businessLocations: businessLocations
+			})
+
 			this.props.notBusinessOwner()
-			this.props.getBusinesses()
+			this.getBusinesses()
+
 		}
 	}
 
@@ -383,22 +407,6 @@ class LocalizedContainer extends React.Component {
 		})
 	}
 
-	// takes a business as a parameter and makes a request to the mapbox api to get the lat and lng of that businesses address
-	getBusinessLocations = async (bus) => {
-		if (bus.address.address_1 !== "") {
-			const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/'${bus.address.address_1} ${bus.address.city} ${bus.address.state} ${bus.address.zip_code}'.json?country=us&limit=10&access_token=pk.eyJ1IjoicmdvaG1hMiIsImEiOiJjazdjZ3N0cnYwMDVxM2Z0NGlsYzZtMzQ2In0.AU_ozSpU4gV6Z8GtDhGjEw`)
-			const location = await response.json()
-			this.setState({
-				businessLocations:[...this.state.businessLocations, {
-					id: bus.id,
-					category: bus.category,
-					name: bus.name,
-					lng: location.features[0].center[1],
-					lat: location.features[0].center[0]
-				}]
-			})
-		}
-	}
 
 	handleNavClick = (item) => {
 		this.setState({

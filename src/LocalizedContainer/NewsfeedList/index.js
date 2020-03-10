@@ -48,7 +48,7 @@ class NewsfeedList extends React.Component {
 							</Card>
 					)})
 					:
-					<h1>"Subscribe to businesses to view their latest posts here!"</h1>
+					<h1>Subscribe to businesses to view their latest posts here!</h1>
 				}
 				</Card.Group>
 			</div>
